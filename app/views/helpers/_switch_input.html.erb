@@ -1,0 +1,26 @@
+<% field ||= "" %>
+<% title ||= "Titulo" %>
+<% label ||= "Campo" %>
+<% switch_id ||= "" %>
+<% div_id ||= "" %>
+<% checked ||= "false" %>
+
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label"><%= title %></label>
+	<div class="col-lg-6 col-md-8 col-sm-10">
+		<div class="checkbox-toggle -large">
+			<% if f.object.new_record? %>
+				<%= f.check_box(field, {:id=> switch_id+'_switch', :checked => checked}) %>
+			<% else %>
+				<%= f.check_box(field, {:id=> switch_id+'_switch'}) %>
+			<% end %>
+			<label for="<%= switch_id %>_switch"><%= label %></label>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$('#<%= switch_id %>_switch').change(function() {
+    $('#<%= div_id %>_div').toggle();
+});
+</script>

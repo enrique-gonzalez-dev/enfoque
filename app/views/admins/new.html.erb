@@ -1,0 +1,7 @@
+<%= render "helpers/bread", index: admins_path, iname: "Administradores", current: "Crear" %>
+ <section class="card mb-3">    
+	<div class="card-body">
+		<div class="card-title mb-3">Crear Administrador</div>
+	   	<%= render 'form', admin: @admin %>	   
+	</div>
+ </section>

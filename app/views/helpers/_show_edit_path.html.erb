@@ -1,0 +1,18 @@
+<% id ||= 0 %>
+<% blank ||= false %>
+<% verb ||= "edit" %>
+<% path ||= "/" %>
+
+<div class="tabledit-toolbar btn-toolbar">
+  <div class="btn-group btn-group-sm">
+    <button type="button" class="tabledit-view-button btn btn-sm btn-default" 
+      onclick="MvhmpjkgasdQglPath($(this))" data-id=<%= "#{id}" %> data-blank=<%= "#{blank}" %> data-path=<%= path %> >
+      <span class="font-icon-eye"></span>
+    </button>
+    <button type="button" class="tabledit-edit-button btn btn-sm btn-default"
+      onclick="xxvkSdfDkbdPath($(this))" data-id=<%= "#{id}" %> data-verb=<%= "#{verb}" %> data-path=<%= path %> >
+      <span class="font-icon-pencil"></span>
+    </button>
+  </div>
+</div>
+

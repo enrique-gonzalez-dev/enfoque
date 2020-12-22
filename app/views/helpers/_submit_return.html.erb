@@ -1,0 +1,18 @@
+<% show ||= "#" %>
+<% index ||= "#" %>
+<% name ||= "Objeto" %>
+<% cancel ||= "Cancelar" %>
+<% update ||= "Guardar Cambios" %>
+
+<div class="row actions-row">
+  <div class="col-xs-12">
+  		<% if f.object.new_record? %>
+			<button type="submit" class="btn btn-inline btn-primary"> <%= "Agregar #{@name}" %> </button>
+      		<%= link_to index, class: "btn btn-outline-danger ml-2" do %> <%= cancel %> <% end %>
+		<% else %>
+			<button type="submit" class="btn btn-inline btn-success"> <%= update %> </button>  			
+			<%= link_to show, class: "btn btn-outline-danger ml-2" do %> Cancelar <% end %>
+  		<% end %>
+
+  </div>
+</div>

@@ -1,0 +1,27 @@
+
+<%= render 'layouts/messages', :obj => resource %>
+<%= render 'layouts/errors', :obj => resource %>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class:"sign-box" }) do |f| %>
+<%= f.hidden_field :reset_password_token %>
+<div class="sign-avatar">
+    <img src="<%= asset_path('home/avatar-sign.png') %>" alt="">
+</div>
+<header class="sign-title">Modifica tu contraseña</header>
+<div class="form-group">
+  <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Nueva Contraseña" %>
+    <% if @minimum_password_length %>
+       <div class="float-right reset">
+            <apan href="reset-password.html"><i>Mínimo (<%= @minimum_password_length %>) caracteres</i></span>
+        </div>
+    <% end %>
+</div>
+
+<div class="form-group">    
+  <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "Confirma Nueva Contraseña" %>
+</div>
+
+<%= f.submit "Cambiar mi contraseña",class:"btn btn-rounded" %>
+<br>
+<%= render "devise/shared/links" %>
+<% end %>

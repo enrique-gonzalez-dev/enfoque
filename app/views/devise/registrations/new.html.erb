@@ -1,0 +1,25 @@
+<%= form_for(resource, :as => resource_name,:html => {class:"sign-box"}, :url => session_path(resource_name)) do |f| %>
+<%= devise_error_messages! %>
+    <div class="sign-avatar no-photo">+</div>
+    <header class="sign-title">Nuevo registro</header>
+    <div class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, class:"form-control not-hi",placeholder:"Correo electrónico", required:true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off", class:"form-control",placeholder:"Contraseña",required:true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control",placeholder:"Contraseña",required:true %>
+    </div>
+    <div class="form-group">
+      <%= render "devise/shared/links" %>
+    </div>
+    <%= f.submit "Registrarme",class:"btn btn-rounded btn-success sign-up" %>
+<% end %>
+

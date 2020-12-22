@@ -1,0 +1,8 @@
+
+<h2>Hola <b><%= @resource.short_fullname %></b></h2>
+
+<% if @resource.try(:unconfirmed_email?) %>
+  <p>Enviamos éste mensaje para notificarte que el correo de tu cuenta en el sistema interno de HandWare está siendo modificado a <b><%= @resource.unconfirmed_email %></b></p>
+<% else %>
+  <p>Enviamos éste mensaje para notificarte que el correo de tu cuenta en el sistema interno de Universidad Siglo XXI ha cambiado a <b><%= @resource.email %></b></p>
+<% end %>

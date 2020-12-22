@@ -1,0 +1,89 @@
+<%= render 'layouts/messages', :obj => @user %>
+<%= render 'layouts/errors', :obj => @user %>
+
+<%= form_for user do |f| %>
+
+<%= render "helpers/text_input_register", f: f, label: "Nombre(s)", field: "first_name", req: true %>
+<%= render "helpers/text_input_register", f: f, label: "Apellido paterno", field: "last_name", req: true %>
+<%= render "helpers/text_input_register", f: f, label: "Apellido materno", field: "surname", req: true %>
+
+<div class="form-group">
+    <label class="row form-control-label">Correo electrónico<span>*</span></label>
+    <div class="row">
+        <%= f.email_field(:email, class: "form-control", placeholder: "Ingrese", required: true) %>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="row form-control-label">Contraseña
+        <span>*</span>
+    </label>
+    <div class="row pass">
+        <%= f.password_field :password, :class=> "form-control hide-show-password", placeholder:"Ingrese", required:true %>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="row form-control-label">Confirmar Contraseña
+        <span>*</span>
+    </label>
+    <div class="row pass">
+        <%= f.password_field :password_confirmation, :class=> "form-control hide-show-password", placeholder:"Ingrese", required:true %>
+    </div>
+</div>
+
+<div class="form-group text-center">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="terms">
+        <label class="form-check-label ml-3" for="terms">
+            <b> Acepto términos y condiciones</b>
+        </label>
+    </div>
+</div>
+
+<div class="actions-row">
+    <div class="col-xs-12" align="center">
+        <button id="submit_register" type="submit" class="btn btn-inline btn-primary mis-btn">Enviar</button>
+    </div>
+</div>
+
+<!--MODAL TELEFONO-->
+<div class="modal fade" id="verifyTelephone" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-body" style="padding: 2rem;">
+                <h1>¡Sin teléfono registrado!</h1>
+                <p style="font-size: 16px;">Todavía no registraste un teléfono. Podrías perderte las novedades y los beneficios que tenemos para ti <b>¿Quieres ingresar tu número ahora?</b></p>
+                <div class="form-group">
+                    <label class="row form-control-label">Teléfono</label>
+                    <div class="row">
+                        <%= f.text_field(:phone, class: "form-control", placeholder: "Ingrese", required: false, id:'second_phone') %>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="submitModal(true)">Omitir</button>
+                <button type="button" class="btn btn-primary" onclick="submitModal(false)">He registrado mi teléfono</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL-->
+<!--MODAL Terminos-->
+<div class="modal fade" id="verifyTerms" tabindex="-1" role="dialog" aria-labelledby="verifyModalContent" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-body" style="padding: 2rem;">
+                <h1>Acepta términos y condiciones</h1>
+                <p style="font-size: 16px;">Antes de continuar con tu registro, debes aceptar los términos y condiciones del servicio.</b></p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt maxime error aut aspernatur, quidem perferendis repudiandae tempore debitis fugiat, inventore doloremque? Assumenda voluptates similique pariatur odio nisi! Recusandae, rerum omnis.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary mis-btn" onclick="acceptTerms()">Acepto los términos y condiciones</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL-->
+<% end %>
+

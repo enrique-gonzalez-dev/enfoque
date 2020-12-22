@@ -1,0 +1,35 @@
+<%= render "helpers/bread", index: current_user.dashboard_path , iname: "Inicio", current: "Mi perfil" %>
+ <section class="card mb-3">
+<div class="row justify-content-center">
+<div class="col-xl-8">
+	<br>
+	<div class="text-center">
+		<h3>Mi perfil</h3>
+		  <img src="<%= asset_path('home/avatar-sign.png') %>" alt="" class="img-fluid">
+	    <br><br>
+		<h5><%= current_user.meta.role_name %></h5>
+
+		<% if current_user.super_user %>
+			<h6><b>Super Administrador</b></h6>			
+		<% end %>
+	</div>
+   <div class="card-block">
+    <%= render "helpers/text_row", n: "Nombre", v: current_user.fullname  %>
+
+     <% if current_user.pending_reconfirmation? %>
+	   <%= render "helpers/email_pending", email: current_user.unconfirmed_email %>
+	  <% end %>
+
+    <%= render "helpers/text_row", n: "Correo electrónico", v: current_user.email  %>
+    <%= render "helpers/text_row", n: "Teléfono", v: current_user.phone %>
+    <%= render "helpers/text_row", n: "Estatus de la cuenta", v: current_user.is_active ? "Activa" : "Inactiva"  %>
+	<div class="row actions-row">
+	  <div class="col-xs-12">
+	      <%= link_to "/users/edit", class: "btn btn-primary" do %> Editar Información <% end %>
+	  </div>
+	</div>
+	<br>
+   </div>
+</div>
+</div>
+</section>

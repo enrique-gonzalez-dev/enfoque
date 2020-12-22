@@ -1,0 +1,36 @@
+
+
+<div class="pr-3 auth-right">
+	<%- if controller_name != 'sessions' %>
+		<%= link_to new_session_path(resource_name), :class => "btn btn-rounded btn-outline-secondary btn-outline-email btn-block btn-icon-text" do %>
+			<i class="i-Mail-with-At-Sign"></i> Inicia sesión
+		<% end %>
+	<% end -%>
+
+	<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+	  <%= link_to "/register", class: "btn btn-rounded btn-outline-secondary btn-outline-email btn-block btn-icon-text" do %>
+			<i class="i-Mail-with-At-Sign"></i> ¿No tienes una cuenta? Regístrate
+		<% end %>
+
+		<%= link_to new_password_path(resource_name), class: "btn btn-rounded btn-outline-google btn-outline-email btn-block btn-icon-text" do %>
+			<i class="i-Mail-with-At-Sign"></i> Recuperar contraseña
+		<% end %>
+	<% end -%>
+
+	<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+
+		<%= link_to new_confirmation_path(resource_name), class: "btn btn-rounded btn-block btn-icon-text btn-outline-facebook" do %>
+			<i class="i-Mail-with-At-Sign"></i> Reenviar correo de confirmación
+		<% end %>
+		
+	<% end -%>
+
+	<% if false  %>		
+		<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+			<p class="sign-note">
+			  <%= link_to "Recibir instrucciones de desbloqueo", new_unlock_path(resource_name) %>
+			</p>
+		<% end -%>
+	<% end %>
+
+</div>

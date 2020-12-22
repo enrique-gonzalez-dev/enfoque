@@ -1,0 +1,35 @@
+<% user ||= "" %>
+<% disabled ||= false %>
+
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label">Activar / desactivar cuenta</label>
+	<div class="col-lg-6 col-md-8 col-sm-10">
+		<div class="checkbox-toggle -large">
+			<% if disabled %>
+				<input type="checkbox" disabled id="check-toggle-5" <%= user.check_for_status %> >
+				<% else %>	
+				<input type="checkbox" id="check-toggle-5" <%= user.check_for_status%> onchange="onUnsubscribe(<%= user.id %>)">
+			<% end %>
+			<label for="check-toggle-5"></label>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">	
+	function onUnsubscribe(user_id)
+	{
+		$.ajax({
+			type:'POST',
+			url:'/users/unsubscribe',
+			dataType: "json",
+			data:
+			{
+				"unsubscribe[id]" : user_id,
+			},
+			success:function(response)
+			{
+				location.reload();
+			}
+		});
+	}
+</script>

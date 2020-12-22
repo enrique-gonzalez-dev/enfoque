@@ -1,0 +1,15 @@
+
+<% flash.each do |message_type, message| %>
+	<% data_type = flash_type(message_type) %>
+
+	<% if data_type == "notif" %>
+		<div style="display:none" class="notif-tag" data-type=<%= data_type %> data-key=<%= message_type %> ><%= message %></div>
+
+	<% else %>
+
+		<% if message != "" && message != true %>			
+			<div style="display:none" class="flash-tag" data-type=<%= data_type %> ><%= message %></div>
+		<% end %>
+
+	<% end %>
+<%end%>

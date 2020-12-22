@@ -1,0 +1,19 @@
+
+td.actions
+{
+   white-space: nowrap; width: 1%;
+}
+
+.actions .tabledit-toolbar
+{
+   text-align: left;
+}
+
+.actions .btn-group,
+.actions .tabledit-view-button,
+.actions .tabledit-edit-button,
+.actions .tabledit-delete-button
+{
+ float: none;
+}
+

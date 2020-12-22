@@ -1,0 +1,33 @@
+<% title ||= "Archivo" %>
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label"><%= title %></label>
+	<div class="col-lg-6 col-md-8 col-sm-10">
+		<% if doc.attached? %>	
+			<% icon = icon_for_content_type(doc.content_type) %>
+			<% if icon == "file-img.png" %>	
+				<%= image_tag doc.variant(resize: "300x300").processed %>
+			<% else %>	
+				<% path = "theme/system/icons/#{icon}" %>
+				<a href="<%= url_for(doc) %>" target="_blank">
+				  <div class="fm-file">
+				    <div class="fm-file-icon">
+				      <img src="<%= asset_path(path) %>" alt="">
+				    </div>
+				    <div class="fm-file-name"><%= title %></div>
+				    <div class="fm-file-size"><%= doc.filename %></div>
+				    <div class="fm-file-link">Ver Archivo</div>
+				  </div>
+				</a>
+			<% end %>	
+		<% else %>
+				<% path = "theme/system/icons/no-file.png" %>	
+			  <div class="fm-file missing">
+			    <div class="fm-file-icon">
+			      <img src="<%= asset_path(path) %>" alt="">
+			    </div>
+			    <div class="fm-file-name"><%= title %></div>
+			    <div class="fm-file-size">(Sin cargar)</div>
+			  </div>
+		<% end %>
+	</div>
+</div>

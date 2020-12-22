@@ -1,0 +1,21 @@
+
+<% if !obj.nil? %>	
+	<% if obj.errors.any? %>
+		<% last_m = "" %>
+		<div class="row">
+			<div class="col-lg-8 col-md-10 col-sm-12">
+				<div class="form-text-block error">
+					<ul>
+
+					    <% obj.errors.each do |attr,message| %>
+					    	<% if message != "" && message != true && last_m != message %>
+					    		<li><%= message %></li>
+					    	<% end %>
+					    	<% last_m = message %>	
+					    <% end %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>

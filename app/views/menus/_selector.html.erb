@@ -1,0 +1,8 @@
+<% user ||= nil %>
+<% if user.meta_type == "Admin" %>
+	<%= render "menus/admin_menu" %>
+<% elsif user.meta_type == "Applicant" %>
+	<%= render "menus/applicant_menu" %>
+<% else %>
+	<%= render "menus/system_menu" %>
+<% end %>

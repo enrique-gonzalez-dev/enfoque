@@ -1,0 +1,10 @@
+
+<% if !obj.nil? %>	
+	<% if obj.errors.any? %>
+	    <% obj.errors.each do |attr,message| %>
+	    	<% if message != "" && message != true %>    		
+	    		<div style="display:none" class="flash-tag" data-type="error" ><%= message %></div>
+	    	<% end %>
+	    <% end %>
+	<% end %>
+<% end %>

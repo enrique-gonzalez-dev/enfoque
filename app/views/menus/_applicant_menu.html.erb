@@ -1,0 +1,27 @@
+ <div class="side-content-wrap">
+    <div class="sidebar-left open rtl-ps-none">
+        <ul class="navigation-left">
+            <li class="nav-item active">
+                <a class="nav-item-hold" href="/">
+                    <i class="nav-icon i-Home1"></i>
+                    <span class="nav-text">Inicio</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item-hold" href="<%= current_user.edit_profile_path %>">
+                    <i class="nav-icon i-Administrator"></i>
+                    <span class="nav-text">Perfil</span>
+                </a>
+                <div class="triangle"></div>
+            </li>  
+            <li class="nav-item">
+                <a class="nav-item-hold" href="<%= current_user.edit_profile_path %>">
+                    <i class="nav-icon i-Library"></i>
+                    <span class="nav-text">Test</span>
+                </a>
+                <div class="triangle"></div>
+            </li>         
+        </ul>
+    </div>
+</div>

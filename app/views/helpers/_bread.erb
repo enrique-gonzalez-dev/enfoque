@@ -1,0 +1,11 @@
+<% index ||= "#" %>
+<% iname ||= "" %>
+<% current ||= "" %>
+
+<div class="breadcrumb">
+    <ul>
+        <li><a href="<%= index %>"><%= iname %></a></li>
+        <li class="active"><%= current %></li>
+    </ul>
+</div>
+<div class="separator-breadcrumb border-top"></div>

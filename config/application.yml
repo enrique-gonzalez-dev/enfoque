@@ -1,0 +1,16 @@
+default: &default
+ crypto_key: TeStCrYptoKEy016
+ init_vector: TeStCrYptoVeCtOR
+ enable_crypt: N
+ app_url: http://localhost:3000
+
+development:
+ <<: *default
+
+production:
+ <<: *default
+ app_url: http://localhost:8080
+
+qa:
+ <<: *default
+ app_url: http://localhost:3005

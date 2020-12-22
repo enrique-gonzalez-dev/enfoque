@@ -1,0 +1,17 @@
+<%= render 'layouts/messages', :obj => resource %>
+<%= render 'layouts/errors', :obj => resource %>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class:"sign-box" }) do |f| %>
+<div class="sign-avatar">
+    <img src="<%= asset_path('home/avatar-sign.png') %>" alt="">
+</div>
+<header class="sign-title">Reenviar instrucciones de confirmación</header>
+<div class="form-group">
+  <%= f.email_field :email, autofocus: true,class:"form-control not-hi",placeholder:"Correo electrónico", required:true,  value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+</div>
+<div class="form-group">
+	<%= f.submit "Reenviar correo de confirmación",class:"btn btn-primary" %>
+	<br>
+	<%= link_to "Ir a Iniciar sesión", new_session_path(resource_name), class:"login-link" %>
+</div>
+<% end %>

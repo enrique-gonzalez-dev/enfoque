@@ -1,0 +1,5 @@
+<h2>Hola <b><%= @resource.short_fullname %></b></h2>
+<p>Tu cuenta del sistema interno de HandWare ha sido bloqueada debido al exceso de intentos fallidos de iniciar sesión.</p>
+<p>Da click en el siguiente link para desbloquear tu cuenta:</p>
+<p><%= link_to 'DESBLOQUEAR MI CUENTA', unlock_url(@resource, unlock_token: @token) %></p>
+

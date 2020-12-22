@@ -1,0 +1,39 @@
+<% field ||= "" %>
+<% object ||= "" %>
+<% label ||= "Campo" %>
+<% div_id ||= field+"_id" %>
+<% visible ||= "all" %>
+<% accept ||= "image/jpeg,image/png,application/pdf" %>
+
+<div class="form-group col-md-6 col-lg-4" id="<%= div_id %>_div" style="display: <%= visible %>;">
+  <label class="form-control-label"><%= label %></label>
+  <% fclass = "fileinput-new" %>
+  <% fstatus = "unknown" %>
+  <% if object.attached? %>
+    <% fclass = "fileinput-exists" %>
+    <% fstatus = "loaded" %>
+  <% end %>
+  <div class="fileinput <%= fclass %>" data-provides="fileinput">  
+    <% if object.attached? %>
+      <% if object.content_type == "image/png" || object.content_type == "image/jpeg" %>
+        <div class="fileinput-preview thumbnail" data-trigger="fileinput">
+          <%= image_tag object %>
+        </div>
+      <% elsif object.content_type == "application/pdf" %>
+        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="line-height: 150px;">
+        <%= object.filename %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="fileinput-preview thumbnail" data-trigger="fileinput"></div>
+    <% end %>
+    <div>
+      <span class="btn btn-file file_input_rails">
+      <span class="fileinput-new">Seleccione un archivo</span>
+      <span class="fileinput-exists">Cambiar archivo</span>
+        <%= f.file_field field, :accept => accept, :id => "#{field}_form_id", "data-loaded" => fstatus %>
+      </span>
+      <a href="#" class="close fileinput-exists" data-dismiss="fileinput">x</a>
+    </div>
+  </div>
+</div>

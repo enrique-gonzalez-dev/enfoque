@@ -1,0 +1,15 @@
+<%= render 'layouts/messages', :obj => resource %>
+<%= render 'layouts/errors', :obj => resource %>
+
+<%= form_for(resource, :as => resource_name,:html => {class:"sign-box reset-password-box"}, :url => password_path(resource_name)) do |f| %>
+
+<div class="sign-avatar">
+    <img src="<%= asset_path('home/avatar-sign.png') %>" alt="">
+</div>
+  
+    <header class="sign-title">Recuperar contraseña</header>
+    <div class="form-group">
+  		<%= f.email_field :email, autofocus: true,class:"form-control not-hi",placeholder:"Correo electrónico", required:true%>
+    </div>
+	<%= f.submit "Recuperar",class:"btn btn-rounded" %> o <%= link_to "Iniciar sesión", new_session_path(resource_name) %>
+<% end %>

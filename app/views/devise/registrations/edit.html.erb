@@ -1,0 +1,62 @@
+<%= render "helpers/bread", index: current_user.profile_path , iname: "Mi Perfil", current: "Ajustes" %>
+
+ <section class="card mb-3">
+  <div class="card-body"> 
+    <div class="card-title mb-3">Editar Información Personal</div> 
+     <div class="card-block">
+      <%= render 'helpers/mandatory' %>
+      <%= form_for(@user, url: "/update_info", html: { method: :post, id: "update_info" }) do |f| %>
+        <%= render "helpers/text_input", f: f, label: "Nombre(s)", field: "first_name", req: true %>
+        <%= render "helpers/text_input", f: f, label: "Apellido paterno", field: "last_name", req: true %>
+        <%= render "helpers/text_input", f: f, label: "Apellido materno", field: "surname", req: true %>
+        <%= render "helpers/text_input", f: f, label: "Teléfono", field: "phone", req: false %>
+      <div class="row actions-row">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-inline btn-success"> Guardar Cambios </button>       
+            <%= link_to current_user.profile_path, class: "btn btn-outline-danger ml-2" do %> Cancelar <% end %>
+        </div>
+      </div>
+      <% end %>
+     </div>
+   </div>
+ </section>
+
+ <section class="card mb-3">
+  <div class="card-body"> 
+    <div class="card-title mb-3">Modificar Datos de Acceso</div> 
+     <div class="card-block">
+    <%= render 'helpers/errors_block', :obj => resource %> 
+    <div class="form-group row ob-panel">
+      <span class="color-red">*</span> <small>&nbsp;Deberá ingresar la contraseña actual para poder modificar el email, o actualizar la contraseña </small>
+    </div>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+        <div class="form-text-block warning">
+          <ul>
+            <li>Esperando confirmación del correo: <b><%= resource.unconfirmed_email %></b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= render "helpers/text_input", f: f, label: "Email", field: "email", req: true %>
+
+  <%= render "helpers/password_input", f: f, label: "Nueva contraseña", field: "password", req: false %>
+  <%= render "helpers/password_input", f: f, label: "Confirme la contraseña", field: "password_confirmation", req: false %>
+  <br>
+  <%= render "helpers/password_input", f: f, label: "Contraseña actual", field: "current_password", req: true %>
+
+<div class="row actions-row">
+  <div class="col-xs-12">
+      <button type="submit" class="btn btn-inline btn-success"> Modificar Datos </button>       
+      <%= link_to current_user.profile_path, class: "btn btn-outline-danger ml-2" do %> Cancelar <% end %>
+  </div>
+</div>
+
+
+<% end %>
+   </div>
+ </section>

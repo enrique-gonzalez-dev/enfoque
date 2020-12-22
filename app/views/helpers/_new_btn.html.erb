@@ -1,0 +1,8 @@
+<% title ||= "Nuevo Registro" %>
+<% path ||= "#" %>
+<% top ||= false %>
+
+<% cc = top ? "row index-row-top" : "row index-row-bottom" %>
+<div class="<%= cc %>">
+	<%= link_to path, class: "btn btn-inline btn-primary" do %> <%= title %> <% end %>
+</div>

@@ -1,0 +1,37 @@
+<%= render 'helpers/errors_block', :obj => admin %>
+<%= render 'helpers/mandatory' %>
+<%= form_for(admin) do |f| %>
+<%= f.fields_for :user  do |builder| %>   
+  <%= builder.hidden_field :email_authenticatable, value: true %>
+
+  <%= render "helpers/text_input", f: builder, label: "Nombre(s)", field: "first_name", req: true %>
+  <%= render "helpers/text_input", f: builder, label: "Apellido paterno", field: "last_name", req: true %>
+  <%= render "helpers/text_input", f: builder, label: "Apellido materno", field: "surname", req: true %>  
+  <%= render "helpers/text_input", f: builder, label: "Teléfono de contacto", field: "phone", req: false %>
+
+<% if @admin.new_record? %>
+  <%= render "helpers/email_input", f: builder, label: "Correo electrónico", field: "email", req: true %>
+  <%= render "helpers/password_input", f: builder, label: "Contraseña", field: "password", req: true %>
+  <%= render "helpers/password_input", f: builder, label: "Confirmar Contraseña", field: "password_confirmation", req: true %>
+<% else %>
+  <br>
+    <div class="form-group row ob-panel">
+        <span class="color-red">**</span> <small>&nbsp;En caso de actualizar la dirección de correo del usuario, se enviará a la nueva dirección un link para la confirmación.</small>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 form-control-label">Correo electrónico<span class="color-red">**</span></label>
+      <div class="col-lg-6 col-md-8 col-sm-10">
+          <%= builder.email_field("email", class: "form-control", required: true) %>
+      </div>
+    </div>
+    <br>
+  <% end %>
+
+<% if current_user.super_user %>
+  <%= render "helpers/check_box_input", f: builder, label: "Marcar como Super Administrador", field: "super_user", sublabel: "Super Administrador", disabled: current_user.id == builder.object.id %>
+<% end %> 
+
+
+<%= render 'helpers/submit_return', f: f, name: "Administrador", index: admins_path, show: admin %>
+<% end %>
+<% end %>

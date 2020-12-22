@@ -1,0 +1,9 @@
+<% count ||= 0 %>
+<% label ||= "No se han agregado elementos" %>
+
+<% sty = "text-align:center; display:none" %>
+<div class="row justify-content-center" id="empty_elements_notice" style="<%= sty %>">
+	<div class="panel-separator"></div>
+	<label><%= label %></label>
+	<div class="panel-separator"></div>
+</div>

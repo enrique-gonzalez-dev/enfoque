@@ -1,0 +1,15 @@
+<% field ||= "" %>
+<% label ||= "Campo" %>
+<% pholder ||= "Ingrese" %>
+<% req ||= false %>
+
+<div class="form-group row">
+	<% if req %>
+		<label class="col-sm-2 form-control-label"><%= label %><span class="color-red">*</span></label>
+	<% else %>
+		<label class="col-sm-2 form-control-label"><%= label %></label>
+	<% end %>
+	<div class="col-lg-6 col-md-8 col-sm-10">
+	    <%= f.text_area(field, class: "form-control", placeholder: pholder, required: req) %>
+	</div>
+</div>

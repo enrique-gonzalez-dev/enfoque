@@ -1,0 +1,16 @@
+<% field ||= "" %>
+<% label ||= "Campo" %>
+<% sublabel ||= "Ingrese" %>
+<% req ||= false %>
+<% disabled ||= false %>
+
+<div class="form-group row">
+	<label class="col-sm-2 form-control-label"><%= label %>
+	</label>
+	<div class="col-lg-6 col-md-8 col-sm-10">
+		<% cc = disabled ? "btn disabled" : "btn" %>
+    	<label class="<%= cc %>">
+			<%= f.check_box(field, disabled: disabled,  class: "inline-checkbox") %> <%= sublabel %>
+		</label>
+	</div>
+</div>

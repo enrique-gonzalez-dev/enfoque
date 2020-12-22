@@ -1,0 +1,36 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'data_tables-bundle', media: 'all' %>
+<% end %>
+<%= render "helpers/bread", index: admins_path, iname: "Administradores", current: @admin.user.fullname %>
+
+ <section class="card mb-3">
+  <div class="card-body">
+   	<% if current_user.super_user && current_user.id != @admin.user.id %>
+      	<%= render "helpers/panel_header_edit_destroy", edit: edit_admin_path(@admin), id: @admin.id, title: "Información del Administrador" %>
+      <% else %> 	
+        <%= render "helpers/panel_header", title: "Información del Administrador" %>	
+   	<% end %>
+     
+     <div class="card-block">
+      <%= render "helpers/text_row", n: "Nombre", v: @admin.user.fullname  %>
+        <% if @admin.user.pending_reconfirmation? %>
+         <%= render "helpers/public_email_pending", email: @admin.user.unconfirmed_email %>
+        <% end %>
+
+      <%= render "helpers/text_row", n: "Correo electrónico", v: @admin.user.email  %>
+      <%= render "helpers/text_row", n: "Estatus de la cuenta", v: @admin.user.is_active ? "Activa" : "Inactiva"  %>
+      <%= render "helpers/text_row", n: "Teléfono", v: @admin.user.phone %>
+
+      <%= render "helpers/text_row", n: "Super Administrador", v: @admin.user.super_user ? "Sí" : "No"  %>
+
+      <% if current_user.super_user %>
+      	<%= render "helpers/switch_deactivate_input", user: @admin.user, disabled: current_user.id == @admin.user.id   %>    	
+      <% end %>
+     </div>
+   </div>
+ </section>
+
+ <% content_for :post_section do %>
+    <%= javascript_include_tag "index_tables-bundle" %>
+  <% end %>
+<%= render :partial => 'helpers/data_container', :locals => { :controller => 'admins', :name => "Administrador", :gender => "M" } %>

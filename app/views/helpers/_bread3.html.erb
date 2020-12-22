@@ -1,0 +1,16 @@
+<% index ||= "#" %>
+<% iname ||= "" %>
+<% subindex ||= "#" %>
+<% subiname ||= "" %>
+<% precurrent ||= "" %>
+<% current ||= "" %>
+
+<div class="breadcrumb">
+    <ul>
+        <li><a href="<%= index %>"><%= iname %></a></li>
+        <li><a href="<%= subindex %>"><%= subiname %></a></li>
+        <li class="active"><%= precurrent %></li>
+	<li class="active"><%= current %></li>
+    </ul>
+</div>
+<div class="separator-breadcrumb border-top"></div>

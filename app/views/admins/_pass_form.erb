@@ -1,0 +1,11 @@
+<%= render 'helpers/errors_block', :obj => admin %>
+<%= render 'helpers/mandatory' %>
+<%= form_for(admin) do |f| %>
+	<%= f.fields_for :user  do |builder| %>   
+
+	  <%= render "helpers/password_input", f: builder, label: "Nueva Contraseña", field: "password", req: true %>
+	  <%= render "helpers/password_input", f: builder, label: "Confirmar Nueva Contraseña", field: "password_confirmation", req: true %>
+	
+	<%= render 'helpers/submit_return', f: f, name: "Gerente", index: admins_path, show: admin, update: "Guardar Contraseña" %>
+	<% end %>
+<% end %>

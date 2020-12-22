@@ -1,0 +1,13 @@
+<% title ||= "Archivo" %>
+<% icon = icon_for_content_type(doc.content_type) %>
+<% path = "theme/system/icons/#{icon}" %>
+<a href="<%= url_for(doc) %>" target="_blank">
+  <div class="fm-file">
+    <div class="fm-file-icon">
+      <img src="<%= asset_path(path) %>" alt="">
+    </div>
+    <div class="fm-file-name"><%= title %></div>
+    <div class="fm-file-size"><%= doc.filename %></div>
+    <div class="fm-file-link">Ver Archivo</div>
+  </div>
+</a>

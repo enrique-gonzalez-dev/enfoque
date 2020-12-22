@@ -1,0 +1,5 @@
+<h2>Bienvenido <b><%= @resource.short_fullname %></b>, al sistema interno de Handware</h2>
+
+<p>Por favor, confirma tu cuenta dando click al siguiente link:</p>
+
+<p><%= link_to 'CONFIRMAR MI CUENTA', confirmation_url(@resource, confirmation_token: @token) %></p>
