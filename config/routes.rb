@@ -1,6 +1,35 @@
 Rails.application.routes.draw do
 
+  resources :applicants do
+    collection do
+      get 'catch_city'
+    end
+  end
   resources :admins
+
+  resources :businesses do
+    collection do
+      get 'catch_city'
+    end
+  end
+  patch 'upload_taxes_img' => 'businesses#upload_taxes_img'
+  patch 'upload_internal_img' => 'businesses#upload_internal_img'
+  patch 'upload_external_img' => 'businesses#upload_external_img'
+  patch 'upload_proof_residency_img' => 'businesses#upload_proof_residency_img'
+  patch 'upload_official_id_img' => 'businesses#upload_official_id_img'
+  patch 'upload_agent_proof_img' => 'businesses#upload_agent_proof_img'
+  patch 'upload_agent_selfie_img' => 'businesses#upload_agent_selfie_img'
+  
+  
+  patch 'upload_ine_id_img' => 'applicants#upload_ine_id_img'
+  patch 'upload_cedule_id_img' => 'applicants#upload_cedule_id_img'
+  patch 'upload_address_proof_img' => 'applicants#upload_address_proof_img'
+  
+  patch 'update_applicant_status' => 'applicants#update_status'
+  patch 'update_status' => 'businesses#update_status'
+  
+  get 'registry_success' => 'businesses#registry_success'
+  get 'registry_applicant_success' => 'applicants#registry_applicant_success'
 
   get 'admin_dashboard' => 'admins#dashboard'
   get 'admin_profile' => 'admins#profile'
@@ -20,10 +49,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'applicant_dashboard' => 'applicants#dashboard'
+  get 'new_register' => 'businesses#new_business'
+  get 'new_applicant_register' => 'applicants#new_applicant'
+
+
   get 'applicant_profile' => 'applicants#profile'
-  get 'edit_profile' => 'applicants#edit_profile'
-  patch 'complete_profile_user' => 'applicants#complete_profile_user'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'pages#home'

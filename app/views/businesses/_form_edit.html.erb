@@ -1,0 +1,117 @@
+<%= render 'layouts/messages', :obj => @business %>
+<%= render 'layouts/errors', :obj => @business %>
+<%= form_with(model: business, local: true) do |f| %>
+  <div class="form-group row ">
+		<label class="col-sm-2 form-control-label">Tipo de registro</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <%= f.select :kind ,Business.kinds.keys.map { |w| [kind_str(w), w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>  
+    </div>
+  </div>
+
+  <%= render "helpers/text_input", f: f, label: "Nombre o Razón Social de la Empresa", field: "name" %>
+  <%= render "helpers/text_input", f: f, label: "RFC", field: "tax_cedule" %>
+
+  <p style="" class="py-2"><strong>Domicilio del centro de trabajo</strong></p>
+  
+  <%= render "helpers/text_input", f: f, label: "Dirección(Calle y número)", field: "street" %>
+  <%= render "helpers/text_input", f: f, label: "Colonia", field: "colony" %>
+  <div class="form-group row ">
+		<label class="col-sm-2 form-control-label">Estado</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <%= f.collection_select(:state_id, State.order(:name), :id, :name, {:prompt => 'Seleccione un estado'}, {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "state_selector"}) %>
+    </div>
+  </div>
+  <div class="form-group row">
+		<label class="col-sm-2 form-control-label">Alcaldía/ Municipio</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <%= f.collection_select(:city_id, City.options_for_select, :id, :name, {:prompt => "Seleccione una ciudad"}, {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "city_selector"}) %>
+    </div>
+  </div>
+  <%= render "helpers/text_input", f: f, label: "Código postal", field: "zip_code" %>
+  <%= render "helpers/text_input", f: f, label: "Teléfono fijo", field: "phone" %>
+  <%= render "helpers/email_input", f: f, label: "Correo electrónico", field: "email" %>
+  <%= render "helpers/numeric_input", f: f, label: "Número de empleados actuales", field: "quantity_employees" %>
+  <%= render "helpers/numeric_input", f: f, label: "Número de becarios solicitados", field: "required_applicants" %>
+  <div class="form-group row">
+		<label class="col-sm-2 form-control-label">Minimo de estudios aceptado</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <%= f.select :minimum_grade ,Business.minimum_grades.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus", :id => "minimum_grade_selector"} %>  
+    </div>
+  </div>
+  
+  <p style="" class="py-2"><strong>Datos del Representante ante el Programa (Persona)</strong></p>
+  <%= render "helpers/text_input", f: f, label: "Nombre(s) y Apellidos", field: "agent_name" %>
+  <%= render "helpers/text_input", f: f, label: "Clave de Elector (viene en INE)", field: "agent_id_code" %>
+  <%= render "helpers/text_input", f: f, label: "Telefono Celular (10 dígitos)", field: "agent_phone" %>
+  <%= render "helpers/email_input", f: f, label: "Correo Electrónico", field: "agent_email" %>
+  <div class="form-group row">
+		<label class="col-sm-2 form-control-label">Cargo en el Centro de Trabajo</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <%= f.select :agent_position ,Business.agent_positions.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>  
+    </div>
+  </div>
+  
+  
+  <div class="actions mt-3" >
+    <%= f.submit "Actualizar", class: "btn btn-warning", style: "" %>
+    <%= link_to "Cancelar", @business, class: "btn btn-danger"%>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.daterange').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      maxDate: new Date(),
+      locale: {
+          format: 'DD/MM/YYYY'
+      }
+  });
+  $("#state_selector").change(function()
+  {
+      onNewSelection($(this));
+  });
+});
+
+function onNewSelection(obj)
+{
+  //alert($('option:selected', obj).val());
+  var val = $('option:selected', obj).val();
+
+  if (val != "")
+    citiesCatcher(val);
+}
+
+var citiesCatcher = function(state){
+  $.ajax({
+    type:'GET',
+    url:'/businesses/catch_city',
+    dataType: "json",
+    data:
+    {
+      "catch_city[state_id]" : state
+    },
+
+    success:function(response)
+    {
+      populateSelect(response['cities']);
+    }
+  });
+}
+function populateSelect(data)
+{
+  var select = $("#city_selector");
+  select.empty();
+
+  for (var i = 0; i < data.length; i++)
+  {
+    var html = '';
+      html += '<option value="' + data[i]['id'] + '">' + data[i]['name'] + '</option>';
+      select.append(html);
+  };
+  select.selectpicker('refresh');
+}
+</script>
+
+

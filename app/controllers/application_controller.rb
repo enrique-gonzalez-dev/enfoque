@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_for_access_level_1
-    redirect_to root_path unless current_user.meta.access_level <= 1
+    if current_user.nil?
+      redirect_to root_path
+    else
+      redirect_to root_path unless current_user.meta.access_level <= 1
+    end
   end
 
   def permission_for_access_level_3

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
-    <title>MIS | More Information For Students </title>
+    <title> Enfoque | Gestión de programa de becarios </title>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -27,8 +27,8 @@
 </head>
 
 
-<body class="text-left">
-    <div class="auth-layout-wrap" style="background-image: url('<%= asset_path("theme/system/bg_home.jpg") %>')">
+<body class="text-left <%= "bg-purple" if current_user.nil?%>">
+    <div class="auth-layout-wrap" >
             <%= render 'layouts/messages'%>
              <%= yield %>   
     </div>
@@ -39,3 +39,6 @@
 </body>
 
 </html>
+<!--
+style="background-image: url('<%= asset_path("theme/system/bg_home.jpg") %>')"
+-->

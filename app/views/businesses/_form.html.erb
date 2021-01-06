@@ -1,0 +1,129 @@
+<%= render 'layouts/messages', :obj => @business %>
+<%= render 'layouts/errors', :obj => @business %>
+<%= form_with(model: business, local: true) do |f| %>
+  <div class="form-group ">
+		<label class="row form-control-label">Tipo de registro</label>
+    <div class="row">
+      <%= f.select :kind ,Business.kinds.keys.map { |w| [kind_str(w), w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>  
+    </div>
+  </div>
+
+  <%= render "helpers/text_input_register", f: f, label: "Nombre o Razón Social de la Empresa", field: "name", req: true %>
+  <%= render "helpers/text_input_register", f: f, label: "RFC", field: "tax_cedule" %>
+
+  <p style="margin-left: -1rem;" class="py-2"><strong>Domicilio del centro de trabajo</strong></p>
+  
+  <%= render "helpers/text_input_register", f: f, label: "Calle", field: "street" %>
+  <%= render "helpers/text_input_register", f: f, label: "Número", field: "number" %>
+  <%= render "helpers/text_input_register", f: f, label: "Colonia", field: "colony" %>
+  <div class="form-group ">
+		<label class="row form-control-label">Estado</label>
+    <div class="row">
+        <%= f.collection_select(:state_id, State.order(:name), :id, :name, {:prompt => 'Seleccione un estado'}, {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "state_selector"}) %>
+    </div>
+  </div>
+  <div class="form-group">
+		<label class="row form-control-label">Alcaldía/ Municipio</label>
+    <div class="row">
+        <%= f.collection_select(:city_id, City.options_for_select, :id, :name, {:prompt => "Seleccione una ciudad"}, {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "city_selector"}) %>
+    </div>
+  </div>
+  <%= render "helpers/text_input_register", f: f, label: "Código postal", field: "zip_code" %>
+  <%= render "helpers/text_input_register", f: f, label: "Teléfono fijo", field: "phone", req: true %>
+  <%= render "helpers/email_input_register", f: f, label: "Correo electrónico", field: "email", req: true %>
+  <%= render "helpers/numeric_input_register", f: f, label: "Número de empleados actuales", field: "quantity_employees" %>
+  <%= render "helpers/numeric_input_register", f: f, label: "Número de becarios solicitados", field: "required_applicants" %>
+  <div class="form-group ">
+		<label class="row form-control-label">Minimo de estudios aceptado</label>
+    <div class="row">
+      <%= f.select :minimum_grade ,Business.minimum_grades.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus", :id => "minimum_grade_selector"} %>  
+    </div>
+  </div>
+  <p style="margin-left: -1rem;" class="py-2"><strong>Documentación del centro de trabajo</strong></p>
+
+  <%= render "helpers/input_file_search", f: f, id: "taxes_img", field: "taxes_id", label: "Cédula de Identificación Fiscal (RFC)" %>
+  <%= render "helpers/input_file_search", f: f, id: "internal_img", field: "internal_img", label: "Foto Interior del Centro de Trabajo" %>
+  <%= render "helpers/input_file_search", f: f, id: "external_img", field: "external_img", label: "Foto Exterior del Centro de Trabajo" %>
+  <%= render "helpers/input_file_search", f: f, id: "address_img", field: "proof_residency", label: "Comprobante de Domicilio (Preferentemente a nombre de la empresa, no mayor a 3 meses de antigüedad)" %>
+
+  <p style="margin-left: -1rem;" class="py-2"><strong>Datos del Representante ante el Programa (Persona)</strong></p>
+  <%= render "helpers/text_input_register", f: f, label: "Nombre(s) y Apellidos", field: "agent_name" %>
+  <%= render "helpers/text_input_register", f: f, label: "Clave de Elector (viene en INE)", field: "agent_id_code" %>
+  <%= render "helpers/text_input_register", f: f, label: "Telefono Celular (10 dígitos)", field: "agent_phone" %>
+  <%= render "helpers/email_input_register", f: f, label: "Correo Electrónico", field: "agent_email" %>
+  <div class="form-group ">
+		<label class="row form-control-label">Cargo en el Centro de Trabajo</label>
+    <div class="row">
+      <%= f.select :agent_position ,Business.agent_positions.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>  
+    </div>
+  </div>
+  <p style="margin-left: -1rem;" class="py-2"><strong>Documentación del representante legal</strong></p>
+  <%= render "helpers/input_file_search", f: f, id: "official_id", field: "official_id", label: "INE/ IFE (ambos lados)" %>
+  <%= render "helpers/input_file_search", f: f, id: "agent_proof", field: "agent_proof", label: "Comprobante de Domicilio (no mayor a 3 meses de antigüedad)" %>
+  <%= render "helpers/input_file_search", f: f, id: "agent_selfie", field: "agent_selfie", label: "Tomar una Selfie y adjuntar" %>
+
+  <%= render "helpers/textarea_input_register", f: f, label: "Comentarios", field: "comments" %>
+
+  
+  <div class="actions" >
+    <%= f.submit "Completar registro", class: "btn btn-success my-4", style: "margin-left: -1rem;" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.daterange').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      maxDate: new Date(),
+      locale: {
+          format: 'DD/MM/YYYY'
+      }
+  });
+  $("#state_selector").change(function()
+  {
+      onNewSelection($(this));
+  });
+});
+
+function onNewSelection(obj)
+{
+  //alert($('option:selected', obj).val());
+  var val = $('option:selected', obj).val();
+
+  if (val != "")
+    citiesCatcher(val);
+}
+
+var citiesCatcher = function(state){
+  $.ajax({
+    type:'GET',
+    url:'/businesses/catch_city',
+    dataType: "json",
+    data:
+    {
+      "catch_city[state_id]" : state
+    },
+
+    success:function(response)
+    {
+      populateSelect(response['cities']);
+    }
+  });
+}
+function populateSelect(data)
+{
+  var select = $("#city_selector");
+  select.empty();
+
+  for (var i = 0; i < data.length; i++)
+  {
+    var html = '';
+      html += '<option value="' + data[i]['id'] + '">' + data[i]['name'] + '</option>';
+      select.append(html);
+  };
+  select.selectpicker('refresh');
+}
+</script>
+
+
