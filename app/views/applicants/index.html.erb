@@ -120,6 +120,9 @@
     </div>
    </div>
  </section>
+ <div class="row">
+   <%= link_to "Registrar becario" , new_applicant_path , class: "ml-3 btn btn-primary" %>
+ </div>
 
 <%= render :partial => 'helpers/data_container', :locals => { :controller => 'applicants', :name => "Becarios", :gender => "M" } %>
 <% content_for :post_section do %>

@@ -24,7 +24,7 @@
   <div class="form-group row">
 		<label class="col-sm-2 form-control-label">Alcaldía/ Municipio</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
-        <%= f.collection_select(:city_id, City.options_for_select, :id, :name, {:prompt => "Seleccione una ciudad"}, {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "city_selector"}) %>
+      <%= f.collection_select(:city_id, City.options_for_select, :id, :name, {:prompt => "Seleccione una ciudad"}, {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "city_selector"}) %>
     </div>
   </div>
   <%= render "helpers/text_input", f: f, label: "Código postal", field: "zip_code" %>
@@ -59,6 +59,7 @@
 <% end %>
 
 <script type="text/javascript">
+var selection = $("#load_city").val();
 $(document).ready(function(){
   $('.daterange').daterangepicker({
       singleDatePicker: true,
@@ -69,7 +70,7 @@ $(document).ready(function(){
       }
   });
   $("#state_selector").change(function()
-  {
+  {    
       onNewSelection($(this));
   });
 });
@@ -79,8 +80,10 @@ function onNewSelection(obj)
   //alert($('option:selected', obj).val());
   var val = $('option:selected', obj).val();
 
-  if (val != "")
+  if (val != ""){
     citiesCatcher(val);
+  }
+
 }
 
 var citiesCatcher = function(state){

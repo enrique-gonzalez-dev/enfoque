@@ -1,5 +1,16 @@
-<h1>New Business</h1>
+<%= render "helpers/bread", index: businesses_path, iname: "Centros de trabajo", current: "Registar centro de trabajo" %>
 
-<%= render 'form', business: @business %>
+<section class="card mb-3">
+    <div class="card-header card-header-lg py-3 mb-3">
+        <h4>
+          Registar Centro de trabajo
+        </h4>
+    </div>
+    <div class="card-block px-5">
+        <%= render 'form', business: @business %>
+        <div class="row mb-3">
+            <%= link_to 'Cancelar', businesses_path, class: "btn btn-danger" %>
+        </div>
+    </div>
+</section>
 
-<%= link_to 'Back', businesses_path %>

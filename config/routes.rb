@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   patch 'upload_cedule_id_img' => 'applicants#upload_cedule_id_img'
   patch 'upload_address_proof_img' => 'applicants#upload_address_proof_img'
   
-  patch 'update_applicant_status' => 'applicants#update_status'
+  patch 'update_applicant_status' => 'applicants#update_applicant_status'
   patch 'update_status' => 'businesses#update_status'
   
   get 'registry_success' => 'businesses#registry_success'

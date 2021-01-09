@@ -1,5 +1,14 @@
-<h1>New Applicant</h1>
+<%= render "helpers/bread", index: businesses_path, iname: "Becarios", current: "Registar becario" %>
+<section class="card mb-3">
+    <div class="card-header card-header-lg py-3 mb-3">
+        <h4>Registrar becario</h4>
+    </div>
+    <div class="card-block px-5">
+        <%= render 'form', applicant: @applicant %>
+        <div class="row mb-3">
+            <%= link_to 'Cancelar', applicants_path, class: "btn btn-danger" %>
+        </div>
+    </div>
+</section>
 
-<%= render 'form', applicant: @applicant %>
 
-<%= link_to 'Back', applicants_path %>

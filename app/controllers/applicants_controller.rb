@@ -118,10 +118,10 @@ class ApplicantsController < ApplicationController
     end
   end
 
-  def update_status
-    status = update_status_params[:status]
-    message = update_status_params[:mail_comment]
-    @applicant = Applicant.find(update_status_params[:id])
+  def update_applicant_status
+    status = update_applicant_status_params[:status]
+    message = update_applicant_status_params[:mail_comment]
+    @applicant = Applicant.find(update_applicant_status_params[:id])
     @applicant.status = status
     @applicant.mail_comment = message
     @applicant.admin_id = current_user.meta.id
@@ -164,7 +164,7 @@ class ApplicantsController < ApplicationController
     def upload_address_proof_img_params
       params.require(:applicant).permit(:address_proof, :id)
     end
-    def update_status_params
+    def update_applicant_status_params
       params.require(:applicant).permit(:status, :id, :mail_comment)
     end
 end

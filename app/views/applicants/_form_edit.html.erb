@@ -6,12 +6,12 @@
   
   <%= render "helpers/text_input", f: f, label: "Nombre completo", field: "name" %>
   <div class="form-group row" >
-      <label class="col-sm-2 form-control-label">Fecha de nacimiento</label>
+    <label class="col-sm-2 form-control-label">Fecha de nacimiento</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
       <div class='input-group date'>
-        <%= f.text_field(:birthday, class: "form-control daterange") %>
+        <%= f.text_field(:finish_date, class: "form-control daterange", value: date_to_picker_format(f.object.birthday)) %>
         <span class="input-group-append">
-          <span class="input-group-text"><i class="font-icon font-icon-calend"></i></span>
+          <span class="input-group-text"><i class="i-Timer1"></i></span>
         </span>
       </div>
     </div>
@@ -50,12 +50,12 @@
   </div>
   <%= render "helpers/text_input", f: f, label: "Institución Académica donde realizaste tus últimos estudios", field: "school" %>
   <div class="form-group row" >
-      <label class="col-sm-2 form-control-label">Fecha de término de Estudios</label>
+    <label class="col-sm-2 form-control-label">Fecha de terminacion de estudios</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
       <div class='input-group date'>
-        <%= f.text_field(:finish_date, class: "form-control daterange") %>
+        <%= f.text_field(:finish_date, class: "form-control daterange", value: date_to_picker_format(f.object.birthday)) %>
         <span class="input-group-append">
-          <span class="input-group-text"><i class="font-icon font-icon-calend"></i></span>
+          <span class="input-group-text"><i class="i-Timer1"></i></span>
         </span>
       </div>
     </div>
@@ -83,6 +83,7 @@ $(document).ready(function(){
           format: 'DD/MM/YYYY'
       }
   });
+  onNewSelection($("#state_selector"));
   $("#state_selector").change(function()
   {
       onNewSelection($(this));

@@ -14,12 +14,12 @@
 </div>
   <%= render "helpers/text_input_register", f: f, label: "Nombre completo", field: "name", req: true%>
   <div class="form-group" >
-      <label class="row form-control-label">Fecha de nacimiento</label>
+    <label class="row form-control-label">Fecha de nacimiento<span >*</span></label>
     <div class="row">
       <div class='input-group date'>
-        <%= f.text_field(:birthday, class: "form-control daterange") %>
+        <%= f.text_field(:birthday, class: "form-control daterange", value: date_to_picker_format(f.object.birthday), required: true) %>
         <span class="input-group-append">
-          <span class="input-group-text"><i class="font-icon font-icon-calend"></i></span>
+          <span class="input-group-text"><i class="i-Timer1"></i></span>
         </span>
       </div>
     </div>
@@ -58,12 +58,12 @@
   </div>
   <%= render "helpers/text_input_register", f: f, label: "Institución Académica donde realizaste tus últimos estudios", field: "school" %>
   <div class="form-group" >
-      <label class="row form-control-label">Fecha de término de Estudios</label>
+    <label class="row form-control-label">Fecha de terminacion de estudios</label>
     <div class="row">
       <div class='input-group date'>
-        <%= f.text_field(:finish_date, class: "form-control daterange") %>
+        <%= f.text_field(:finish_date, class: "form-control daterange", value: date_to_picker_format(f.object.birthday)) %>
         <span class="input-group-append">
-          <span class="input-group-text"><i class="font-icon font-icon-calend"></i></span>
+          <span class="input-group-text"><i class="i-Timer1"></i></span>
         </span>
       </div>
     </div>
@@ -88,12 +88,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $('.daterange').daterangepicker({
-      singleDatePicker: true,
-      showDropdowns: true,
-      maxDate: new Date(),
-      locale: {
-          format: 'DD/MM/YYYY'
-      }
+    singleDatePicker: true,
+    showDropdowns: true,
+    maxDate: new Date(),
+    locale: {
+      format: 'DD/MM/YYYY'
+    }
   });
   $("#state_selector").change(function()
   {
