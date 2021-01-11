@@ -1,0 +1,332 @@
+<%= render "helpers/bread", index: businesses_path, iname: "Centros de trabajo", current: "#{@business.name}" %>
+
+<section class="card">
+  <div class="card-header py-3 px-3">
+    <h4>
+      <strong>Centro de trabajo</strong>
+    </h4>
+  </div>
+  <div class="card-body px-3">
+  <ul class="nav nav-tabs" id="myIconTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile_tab" role="tab" aria-controls="homeIcon" aria-selected="true"><i class="nav-icon i-Administrator mr-1"></i>Centro de trabajo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="demographic-tab" data-toggle="tab" href="#demgraphic_tab" role="tab" aria-controls="profileIcon" aria-selected="false"><i class="nav-icon i-Testimonal mr-1"></i>Representante</a>
+        </li>
+    </ul>
+  <div class="tab-content" id="myIconTabContent">
+  
+    <div class="tab-pane fade show active" id="profile_tab" role="tabpanel" aria-labelledby="profile-tab">
+      <%= render "helpers/panel_header_edit_destroy", edit: edit_business_path(@business), title: "" %>
+
+      <div class="row">
+        <%= render "helpers/text_show", n: "Tipo de registro" , v: kind_str(@business.kind) %>
+        <%= render "helpers/text_show", n: "Nombre o razón social" , v: @business.name %>
+        <%= render "helpers/text_show", n: "RFC" , v: @business.tax_cedule %>
+      </div>
+      <p class="mt-3"><strong>Domicilio del centro de trabajo</strong></p>
+      <div class="row">
+        <%= render "helpers/text_show", n: "Calle" , v: @business.street %>
+        <%= render "helpers/text_show", n: "Colonia" , v: @business.colony %>
+        <%= render "helpers/text_show", n: "Municipio" , v: City.find(@business.city_id).name if @business.city_id.present? %>
+        <%= render "helpers/text_show", n: "Estado" , v: State.find(@business.state_id).name if @business.state_id.present? %>
+      
+        <%= render "helpers/text_show", n: "Código postal", v: @business.zip_code %>
+        <%= render "helpers/text_show", n: "Teléfono fijo", v: @business.phone %>
+        <%= render "helpers/text_show", n: "Correo electrónico", v: @business.email %>
+        <%= render "helpers/text_show", n: "Número de empleados actuales", v: @business.quantity_employees %>
+        <%= render "helpers/text_show", n: "Número de becarios solicitados", v: @business.required_applicants %>
+        <%= render "helpers/text_show", n: "Minimo de estudios aceptado", v: @business.minimum_grade %>
+      </div>
+      <hr>
+      <p class="mt-3"><strong>Documentos del centro de trabajo</strong></p>
+      <div class="row">
+        <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+          <%= form_for @business, id: "upload_taxes_img_form" , :url => { :action => 'upload_taxes_img'}, :html => { id: "upload_taxes_form"} do |form|%>
+            <%= form.hidden_field :id, value: @business.id%>
+            <%= form.file_field :taxes_id, id: "upload_taxes_input", class: "form-control", hidden: "true" %>
+          <% end %>
+          <% if @business.taxes_id.attachment.nil? %>
+            <div class="fm-file missing">
+              <div class="fm-file-icon">
+                <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+              </div>
+              <div class="fm-file-name">Cedula Fiscal</div>
+              <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_taxes_input').click()" id="upload_taxes_img"> Cargar imagen</button></div>
+            </div>
+          <% else %>
+            <div class="row">
+              <div class="col-12">
+                <%= render "helpers/file_info", doc: @business.taxes_id, title: "Cedula Fiscal", download:true %>
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_taxes_input').click()" id="upload_taxes_img"> 
+                  Cambiar imagen
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+          <%= form_for @business , :url => { :action => 'upload_internal_img'}, :html => { id: "upload_internal_form"} do |form|%>
+            <%= form.hidden_field :id, value: @business.id%>
+            <%= form.file_field :internal_img, id: "upload_internal_input", class: "form-control", hidden: "true" %>
+          <% end %>
+          <% if @business.internal_img.attachment.nil? %>
+            <div class="fm-file missing">
+              <div class="fm-file-icon">
+                <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+              </div>
+              <div class="fm-file-name">Imagen interna</div>
+              <div class="fm-file-size">
+                <button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_internal_input').click()" id="upload_internal_img"> 
+                  Cargar imagen
+                </button>
+              </div>
+            </div>
+          <% else %>
+            <div class="row">
+              <div class="col-12">
+                <%= render "helpers/file_info", doc: @business.internal_img, title: "Imagen interna", download:true %>
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_internal_input').click()" id="upload_internal_img"> 
+                  Cambiar imagen
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+          <%= form_for @business , :url => { :action => 'upload_external_img'}, :html => {:id => "upload_external_form"} do |form|%>
+            <%= form.hidden_field :id, value: @business.id%>
+            <%= form.file_field :external_img, id: "upload_external_input", class: "form-control", hidden: "true" %>
+          <% end %>
+          <% if @business.external_img.attachment.nil? %>
+            <div class="fm-file missing">
+              <div class="fm-file-icon">
+                <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+              </div>
+              <div class="fm-file-name">Imagen externa</div>
+              <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_external_input').click()" id="upload_external_img"> Cargar imagen</button></div>
+                
+            </div>
+          <% else %>
+            <div class="row">
+              <div class="col-12">
+                <%= render "helpers/file_info", doc: @business.external_img, title: "Imagen externa", download:true %>
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_external_input').click()" id="upload_external_img"> 
+                  Cambiar imagen
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+          <%= form_for @business, id: "upload_proof_residency_img_form" , :url => { :action => 'upload_proof_residency_img'}, :html => { id: "upload_residency_form"} do |form|%>
+            <%= form.hidden_field :id, value: @business.id%>
+            <%= form.file_field :proof_residency, id: "upload_proof_residency_input", class: "form-control", hidden: "true" %>
+          <% end %>
+          <% if @business.proof_residency.attachment.nil? %>
+            <div class="fm-file missing">
+              <div class="fm-file-icon">
+                <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+              </div>
+              <div class="fm-file-name">Comprobante de domicilio</div>
+              <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_proof_residency_input').click()" id="upload_proof_residency_img"> Cargar imagen</button></div>
+                
+            </div>
+          <% else %>
+            <div class="row">
+              <div class="col-12">
+                <%= render "helpers/file_info", doc: @business.proof_residency, title: "Comprobante de domicilio", download:true %>
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_proof_residency_input').click()" id="upload_proof_residency_img"> 
+                  Cambiar imagen
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+      <%# End documents row %>
+    <div class="tab-pane fade" id="demgraphic_tab" role="tabpanel" aria-labelledby="demographic-tab">
+      <%= render "helpers/panel_header_edit_destroy", edit: edit_business_path(@business), title: "" %>
+
+      <p class="mt-3"><strong>Datos del Representante ante el Programa (Persona)</strong></p>
+      <div class="row">
+        <%= render "helpers/text_show", n: "Nombre(s) y Apellidos" , v: @business.agent_name %>
+        <%= render "helpers/text_show", n: "Clave de Elector (viene en INE)" , v: @business.agent_id_code %>
+        <%= render "helpers/text_show", n: "Telefono Celular (10 dígitos)" , v: @business.agent_phone %>
+        <%= render "helpers/text_show", n: "Correo Electrónico" , v: @business.agent_email %>
+        <%= render "helpers/text_show", n: "Cargo en el Centro de Trabajo" , v: @business.agent_position %>
+      </div>
+      <hr>
+      <p class="mt-3"><strong>Documentos del Representante</strong></p>
+        <div class="row">
+          <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+            <%= form_for @business, id: "official_id_img_form" , :url => { :action => 'upload_official_id_img'}, :html => { id: "official_id_form"} do |form|%>
+              <%= form.hidden_field :id, value: @business.id%>
+              <%= form.file_field :official_id, id: "official_id_input", class: "form-control", hidden: "true" %>
+            <% end %>
+            <% if @business.official_id.attachment.nil? %>
+              <div class="fm-file missing">
+                <div class="fm-file-icon">
+                  <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+                </div>
+                <div class="fm-file-name">INE/ IFE (ambos lados)</div>
+                <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#official_id_input').click()" id="official_id_img"> Cargar imagen</button></div>
+              </div>
+            <% else %>
+              <div class="row">
+                <div class="col-12">
+                  <%= render "helpers/file_info", doc: @business.official_id, title: "INE/ IFE (ambos lados)", download:true %>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                  <button type="button" class="my-3 btn btn-primary" onclick="$('#official_id_input').click()" id="official_id_img"> 
+                    Cambiar imagen
+                  </button>
+                </div>
+    
+              </div>
+            <% end %>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+            <%= form_for @business, id: "agent_proof_img_form" , :url => { :action => 'upload_agent_proof_img'}, :html => { id: "agent_proof_form"} do |form|%>
+              <%= form.hidden_field :id, value: @business.id%>
+              <%= form.file_field :agent_proof, id: "agent_proof_input", class: "form-control", hidden: "true" %>
+            <% end %>
+            <% if @business.agent_proof.attachment.nil? %>
+              <div class="fm-file missing">
+                <div class="fm-file-icon">
+                  <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+                </div>
+                <div class="fm-file-name">Comprobante de Domicilio</div>
+                <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#agent_proof_input').click()" id="agent_proof_img"> Cargar imagen</button></div>
+              </div>
+            <% else %>
+              <div class="row">
+                <div class="col-12">
+                  <%= render "helpers/file_info", doc: @business.agent_proof, title: "Comprobante de Domicilio", download:true %>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                  <button type="button" class="my-3 btn btn-primary" onclick="$('#agent_proof_input').click()" id="agent_proof_img"> 
+                    Cambiar imagen
+                  </button>
+                </div>
+    
+              </div>
+            <% end %>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+            <%= form_for @business, id: "agent_selfie_img_form" , :url => { :action => 'upload_agent_selfie_img'}, :html => { id: "agent_selfie_form"} do |form|%>
+              <%= form.hidden_field :id, value: @business.id%>
+              <%= form.file_field :agent_selfie, id: "agent_selfie_input", class: "form-control", hidden: "true" %>
+            <% end %>
+            <% if @business.agent_selfie.attachment.nil? %>
+              <div class="fm-file missing">
+                <div class="fm-file-icon">
+                  <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+                </div>
+                <div class="fm-file-name">Selfie</div>
+                <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#agent_selfie_input').click()" id="agent_selfie_img"> Cargar imagen</button></div>
+              </div>
+            <% else %>
+              <div class="row">
+                <div class="col-12">
+                  <%= render "helpers/file_info", doc: @business.agent_selfie, title: "Selfie", download:true %>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                  <button type="button" class="my-3 btn btn-primary" onclick="$('#agent_selfie_input').click()" id="agent_selfie_img"> 
+                    Cambiar imagen
+                  </button>
+                </div>
+    
+              </div>
+            <% end %>
+          </div>
+        </div>
+    </div>
+    </div>
+    <%# End documentos centro de trabajo %>    
+  </div>
+</section>
+<section class="card my-4">
+  <div class="card-header py-3 px-3">
+    <h4>
+      <strong>Validación</strong>
+    </h4>
+  </div>
+  <div class="card-body px-3">
+  <% if @business.status == 2%>
+    <div class="alert alert-danger" role="alert">
+      Rechazado por <%= User.find(@business.admin_id).fullname %> el <%= @business.updated_at%>
+    </div>
+  <% end %>
+  <% if @business.admin_id.present? && @business.status == 1%>
+    <div class="alert alert-success" role="alert">
+      Validacion por <%= User.find(@business.admin_id).fullname %> el <%= @business.updated_at%>
+    </div>
+  <% else %>
+    <%= form_for @business, :url => { :action => 'update_status'}, :html => { id: "update_status_form"} do |form|%>
+      <%= form.hidden_field :id, value: @business.id %>
+      <%= form.hidden_field :status, value: 0, id: "status_input"%>
+      <%= render "helpers/textarea_input", f: form, label: "Comentarios", field: "mail_comment" %>
+    <% end %>
+    <div class="form-goup row">
+      <label class="col-sm-2 form-control-label"></label>
+      <div class="col-lg-6 col-md-8 col-sm-10">
+          <button type="button" class="btn btn-success" id="validates_business">Validar</button>
+          <button type="button" class="btn btn-danger" id="rejects_business">Rechazar</button>
+      </div>
+        
+    </div>
+  <% end %>
+    
+  </div>
+</section>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#validates_business").click(function(){
+        $("#status_input").val(1);
+        $("#update_status_form").submit();
+    });
+    $("#rejects_business").click(function(){
+        $("#status_input").val(2);
+        $("#update_status_form").submit();
+        // alert($("#status_input").val());
+    });
+  $("#upload_taxes_input").change(function(){
+    $("#upload_taxes_form").submit();
+  });
+  $("#upload_internal_input").change(function(){
+    $("#upload_internal_form").submit();
+  });
+  $("#upload_external_input").change(function(){
+    $("#upload_external_form").submit();
+  });
+  $("#upload_proof_residency_input").change(function(){
+    $("#upload_residency_form").submit();
+  });
+  $("#official_id_input").change(function(){
+    $("#official_id_form").submit();
+  });
+  $("#agent_proof_input").change(function(){
+    $("#agent_proof_form").submit();
+  });
+  $("#agent_selfie_input").change(function(){
+    $("#agent_selfie_form").submit();
+  });
+  
+  
+});
+
+</script>
+
+
+  

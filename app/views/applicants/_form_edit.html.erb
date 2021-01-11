@@ -1,0 +1,133 @@
+<%= render 'layouts/messages', :obj => @applicant %>
+<%= render 'layouts/errors', :obj => @applicant %>
+<%= form_with(model: applicant, local: true) do |f| %>
+
+  <p style="margin-left: -1rem;" class="py-2"><strong>Información Becario</strong></p>
+  
+  <%= render "helpers/text_input", f: f, label: "Nombre completo", field: "name" %>
+  <div class="form-group row" >
+    <label class="col-sm-2 form-control-label">Fecha de nacimiento</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class='input-group date'>
+        <%= f.text_field(:finish_date, class: "form-control daterange", value: date_to_picker_format(f.object.birthday)) %>
+        <span class="input-group-append">
+          <span class="input-group-text"><i class="i-Timer1"></i></span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <p style="margin-left: -1rem;" class="py-2"><strong>Domicilio</strong></p>
+  <%= render "helpers/text_input", f: f, label: "Calle", field: "street" %>
+  <%= render "helpers/text_input", f: f, label: "Número exterior", field: "number" %>
+  <%= render "helpers/text_input", f: f, label: "Colonia", field: "colony" %>
+
+  <div class="form-group row">
+		<label class="col-sm-2 form-control-label">Estado</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <%= f.collection_select(:state_id, State.order(:name), :id, :name, {:prompt => 'Seleccione un estado'}, {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "state_selector"}) %>
+    </div>
+  </div>
+  <div class="form-group row">
+		<label class="col-sm-2 form-control-label">Alcaldía/ Municipio</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <%= f.collection_select(:city_id, City.options_for_select, :id, :name, {:prompt => "Seleccione una ciudad"}, {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "city_selector"}) %>
+    </div>
+  </div>
+  <%= render "helpers/text_input", f: f, label: "Código postal", field: "zip_code" %>
+  <p style="margin-left: -1rem;" class="py-2"><strong>Datos Becario</strong></p>
+  
+  <%= render "helpers/text_input", f: f, label: "Clave de Elector (viene en INE)", field: "id_code" %>
+  <%= render "helpers/text_input", f: f, label: "CURP", field: "curp_code" %>
+  <%= render "helpers/text_input", f: f, label: "Telefono Celular (10 dígitos)", field: "phone" %>
+  <%= render "helpers/email_input", f: f, label: "Correo Electrónico", field: "email" %>
+  <%= render "helpers/text_input", f: f, label: "Perfil en Facebook", field: "social_profile" %>
+  
+  <div class="form-group row">
+		<label class="col-sm-2 form-control-label">Nivel de Estudios</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <%= f.select :school_grade ,Applicant.school_grades.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>  
+    </div>
+  </div>
+  <%= render "helpers/text_input", f: f, label: "Institución Académica donde realizaste tus últimos estudios", field: "school" %>
+  <div class="form-group row" >
+    <label class="col-sm-2 form-control-label">Fecha de terminacion de estudios</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class='input-group date'>
+        <%= f.text_field(:finish_date, class: "form-control daterange", value: date_to_picker_format(f.object.birthday)) %>
+        <span class="input-group-append">
+          <span class="input-group-text"><i class="i-Timer1"></i></span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <%= render "helpers/text_input", f: f, label: "Nombre de algún familiar", field: "familiar_fullname" %>
+  <%= render "helpers/text_input", f: f, label: "Parentezco con el familiar", field: "familiar_relationship" %>
+  <%= render "helpers/text_input", f: f, label: "Teléfono del familiar", field: "familiar_phone" %>
+  
+  <p style="margin-left: -1rem;" class="py-2"><strong>Documentos</strong></p>
+
+  <%= render "helpers/textarea_input", f: f, label: "Comentarios", field: "comments" %>
+  
+  <div class="actions" >
+    <%= f.submit "Actializar", class: "btn btn-warning my-4", style: "margin-left: -1rem;" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.daterange').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      maxDate: new Date(),
+      locale: {
+          format: 'DD/MM/YYYY'
+      }
+  });
+  onNewSelection($("#state_selector"));
+  $("#state_selector").change(function()
+  {
+      onNewSelection($(this));
+  });
+});
+
+function onNewSelection(obj)
+{
+  //alert($('option:selected', obj).val());
+  var val = $('option:selected', obj).val();
+
+  if (val != "")
+    citiesCatcher(val);
+}
+
+var citiesCatcher = function(state){
+  $.ajax({
+    type:'GET',
+    url:'/businesses/catch_city',
+    dataType: "json",
+    data:
+    {
+      "catch_city[state_id]" : state
+    },
+
+    success:function(response)
+    {
+      populateSelect(response['cities']);
+    }
+  });
+}
+function populateSelect(data)
+{
+  var select = $("#city_selector");
+  select.empty();
+
+  for (var i = 0; i < data.length; i++)
+  {
+    var html = '';
+      html += '<option value="' + data[i]['id'] + '">' + data[i]['name'] + '</option>';
+      select.append(html);
+  };
+  select.selectpicker('refresh');
+}
+</script>
+
+

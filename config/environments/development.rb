@@ -63,7 +63,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: ENV['MAILER_HOST'], port: ENV['MAILER_PORT'] }
-  config.action_mailer.default_options = {from: "MIS <#{ENV['MAIL_DEVELOPMENT']}>"}
+  config.action_mailer.default_options = {from: "Enfoque <#{ENV['MAIL_DEVELOPMENT']}>"}
   
 
   config.action_mailer.raise_delivery_errors = true

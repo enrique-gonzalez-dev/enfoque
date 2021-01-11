@@ -1,0 +1,135 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'data_tables-bundle', media: 'all' %>
+<% end %>
+
+<section class="card mb-3">
+     <header class="card-header card-header-lg py-3 mb-3">     
+        <h4>
+          Centros de trabajo
+        </h4>
+    </header>  
+
+   <div class="card-block">
+   <ul class="nav nav-tabs my-4 px-2" id="myIconTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active text-success" id="validated_tab" data-toggle="tab" href="#validated-tab" role="tab" aria-controls="validateIcon" aria-selected="true"><i class="nav-icon i-Checked-User mr-1"></i>Validados</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" id="rejected-tab" data-toggle="tab" href="#rejected_tab" role="tab" aria-controls="rejectedIcon" aria-selected="false"><i class="nav-icon i-Close-Window mr-1"></i> Rechazados</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-warning" id="pending-tab" data-toggle="tab" href="#pending_tab" role="tab" aria-controls="profileIcon" aria-selected="false"><i class="nav-icon i-Find-User mr-1"></i>Pendientes </a>
+        </li>
+        
+    </ul>
+    <div class="tab-content" id="myIconTabContent">
+      <div class="tab-pane fade show active" id="validated-tab" role="tabpanel" aria-labelledby="validated_tab">
+        <table id="table" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
+          <thead>
+            <tr>
+              <th data-main="true" data-order="desc">ID</th>
+              <th > Nombre o <br> Razón Social</th>
+              <th > Tipo de <br> registro</th>
+              <th > Alcaldía/ <br>Municipio</th>
+              <th > Estado</th>
+              <th > Cantidad de <br>becarios</th>
+              <th > Grado <br>minimo</th>
+              <th data-action="true"> ACCIONES </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @validated_businesses.each do |obj| %>
+              <tr>
+                <td><%= obj.id %></td>
+                <td><%= obj.name %></td>
+                <td><%= kind_str(obj.kind) %></td>
+                <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
+                <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
+                <td><%= obj.required_applicants %></td>
+                <td><%= obj.minimum_grade %></td>
+                <td class="actions">
+                  <%= render "helpers/show_edit_destroy", id: obj.id %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="tab-pane fade" id="rejected_tab" role="tabpanel" aria-labelledby="rejected-tab">
+        <table id="table-1" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
+          <thead>
+            <tr>
+              <th data-main="true" data-order="desc">ID</th>
+              <th > Nombre o <br> Razón Social</th>
+              <th > Tipo de <br> registro</th>
+              <th > Alcaldía/ <br>Municipio</th>
+              <th > Estado</th>
+              <th > Cantidad de <br>becarios</th>
+              <th > Grado <br>minimo</th>
+              <th data-action="true"> ACCIONES </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @rejected_businesses.each do |obj| %>
+              <tr>
+                <td><%= obj.id %></td>
+                <td><%= obj.name %></td>
+                <td><%= kind_str(obj.kind) %></td>
+                <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
+                <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
+                <td><%= obj.required_applicants %></td>
+                <td><%= obj.minimum_grade %></td>
+                <td class="actions">
+                  <%= render "helpers/show_edit_destroy", id: obj.id %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="tab-pane fade" id="pending_tab" role="tabpanel" aria-labelledby="pending-tab">
+        <table id="table-2" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
+          <thead>
+            <tr>
+              <th data-main="true" data-order="desc">ID</th>
+              <th > Nombre o <br> Razón Social</th>
+              <th > Tipo de <br> registro</th>
+              <th > Alcaldía/ <br>Municipio</th>
+              <th > Estado</th>
+              <th > Cantidad de <br>becarios</th>
+              <th > Grado <br>minimo</th>
+              <th data-action="true"> ACCIONES </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @pending_businesses.each do |obj| %>
+              <tr>
+                <td><%= obj.id %></td>
+                <td><%= obj.name %></td>
+                <td><%= kind_str(obj.kind) %></td>
+                <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
+                <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
+                <td><%= obj.required_applicants %></td>
+                <td><%= obj.minimum_grade %></td>
+                <td class="actions">
+                  <%= render "helpers/show_edit_destroy", id: obj.id %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+      </div>
+
+    </div>
+   </div>
+ </section>
+ <div class="row">
+   <%= link_to "Registrar centro de trabajo" , new_business_path , class: "ml-3 btn btn-primary" %>
+ </div>
+<%= render :partial => 'helpers/data_container', :locals => { :controller => 'businesses', :name => "Centro de trabajo", :gender => "M" } %>
+<% content_for :post_section do %>
+   <%= javascript_include_tag "index_tables-bundle" %>
+<% end %>

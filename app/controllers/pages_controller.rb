@@ -5,6 +5,8 @@ class PagesController < ApplicationController
         redirect_to current_user.dashboard_path      
     end
   end
+  def public_registry
+  end
 
 	def create
 		respond_to do |format|

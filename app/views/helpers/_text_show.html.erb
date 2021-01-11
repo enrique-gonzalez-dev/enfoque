@@ -1,0 +1,10 @@
+<% n ||= "--" %>
+<% v ||= "--" %>
+<% if v.blank? %>
+<% v = "--" %>
+<% end %>
+<% icon ||= "i-ID-Card" %>
+<div class="col-12 col-md-6 col-lg-4 my-2">
+	<p class="text-primary mb-1"><i class="<%= icon %> text-16 mr-1"></i><%= n %></p>
+    <span class="mx-2 my-2"><%= v %></span>
+</div>

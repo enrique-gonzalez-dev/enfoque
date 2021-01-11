@@ -1,0 +1,13 @@
+<%= render "helpers/bread", index: applicants_path, iname: "Becarios", current: "Editar" %>
+<section class="card">
+  <div class="card-header py-3 px-3">
+    <h4>
+      <strong>Becario</strong>
+    </h4>
+  </div>
+  <div class="card-body px-5">
+    <%= render 'form_edit', applicant: @applicant %>
+  </div>
+</section>
+
+

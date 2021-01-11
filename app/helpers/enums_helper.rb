@@ -67,6 +67,16 @@ module EnumsHelper
 		end
 	end
 
+	def kind_str(st)
+		case st
+		when "fisica"
+			return "Persona Fisica"
+		when "moral"
+			return "Persona Moral"
+		else
+			return st
+		end
+	end
 
 	def invoice_status_str(st)
 		case st

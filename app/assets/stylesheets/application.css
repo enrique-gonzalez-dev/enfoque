@@ -14,3 +14,7 @@
  *= require_tree ./global
  *= require_tree ./alerts
  */
+
+.bg-purple {
+    background: linear-gradient(0deg, rgb(255, 228, 76) 0%, rgb(255, 244, 148) 100%)!important;
+}
