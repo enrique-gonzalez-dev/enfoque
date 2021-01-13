@@ -7,11 +7,6 @@
 		<% end %>
 	<% end -%>
 
-	<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-	  <%= link_to "/register", class: "btn btn-rounded btn-outline-secondary btn-outline-email btn-block btn-icon-text" do %>
-			<i class="i-Mail-with-At-Sign"></i> ¿No tienes una cuenta? Regístrate
-		<% end %>
-
 		<%= link_to new_password_path(resource_name), class: "btn btn-rounded btn-outline-google btn-outline-email btn-block btn-icon-text" do %>
 			<i class="i-Mail-with-At-Sign"></i> Recuperar contraseña
 		<% end %>
