@@ -1,5 +1,6 @@
-<%= render "helpers/bread", index: businesses_path, iname: "Centros de trabajo", current: "Registar centro de trabajo" %>
-
+<% if current_user %>
+  <%= render "helpers/bread", index: businesses_path, iname: "Centros de trabajo", current: "Registar centro de trabajo" %>
+<% end %>
 <section class="card mb-3">
     <div class="card-header card-header-lg py-3 mb-3">
         <h4>
