@@ -1,0 +1,14 @@
+<%= render "helpers/bread", index: business_reports_path, iname: "Reportes de Centros de trabajo", current: "Nuevo reporte" %>
+<section class="card mb-5">
+  <div class="card-header py-3 px-3">
+    <h4>
+      <strong>Nuevo reporte</strong>
+    </h4>
+  </div>
+  <div class="card-body px-5 py-3">
+    <%= render 'form', business_report: @business_report %>
+    <%= link_to 'Back', business_reports_path, class: "btn btn-danger my-3" %>
+  </div>
+</section>
+
+

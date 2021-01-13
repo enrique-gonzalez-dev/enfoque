@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :business_reports
+
+  post 'create_business_report' => 'businesses#create_business_report'
+
+
   resources :applicants do
     collection do
       get 'catch_city'

@@ -1,0 +1,22 @@
+<%= render 'layouts/messages', :obj => @business_report %>
+<%= render 'layouts/errors', :obj => @business_report %>
+<%= form_with(model: business_report, local: true) do |f| %>
+  <%= render "helpers/text_input", f: f, label: "Reporte", field: "title" %>
+  <div class="form-group row">
+		<label class="col-2 form-control-label">Centro de trabajo</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+    <% if @business_report.business_id.nil? %>
+      <%= f.collection_select(:business_id, Business.where(status: 1).order(:name), :id, :name, {:prompt => 'Seleccione un centro de trabajo'}, {:class => "selectpicker form-control", 'data-live-search' => "true"}) %>
+    <% else %>
+      <%= f.collection_select(:business_id, Business.where(status: 1).order(:name), :id, :name, {:prompt => 'Seleccione un centro de trabajo'}, {:class => "selectpicker form-control", 'data-live-search' => "true", :disabled => true}) %>
+    <% end %>
+    </div>
+  </div>
+  <%= render "helpers/input_file_search_sm", f: f, id: "report_img", field: "report_img", label: "Foto del reporte" %>
+  <%= render "helpers/input_file_search_sm", f: f, id: "payment_img", field: "payment_img", label: "Foto del reporte" %>
+  <%= render "helpers/text_input", f: f, label: "Comentarios", field: "comment" %>
+  
+  <div class="actions">
+    <%= f.submit "Agregar", class: "btn btn-success" %>
+  </div>
+<% end %>

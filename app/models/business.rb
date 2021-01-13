@@ -5,6 +5,7 @@ class Business < ApplicationRecord
 
     has_one :state
     has_one :city
+    has_many :business_reports
 
     has_one_attached :taxes_id
     has_one_attached :internal_img

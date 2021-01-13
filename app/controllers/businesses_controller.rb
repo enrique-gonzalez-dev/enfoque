@@ -15,6 +15,8 @@ class BusinessesController < ApplicationController
   # GET /businesses/1
   # GET /businesses/1.json
   def show
+    @business_report = BusinessReport.new(business_id: @business.id)
+    @business_reports = BusinessReport.where(business_id: @business.id)
   end
 
   # GET /businesses/new
@@ -27,6 +29,24 @@ class BusinessesController < ApplicationController
   end
   def registry_success
     
+  end
+
+  def create_business_report
+    debugger
+    @business = Business.find(business_report_params[:business_id])
+    @business_report = BusinessReport.new(business_report_params)
+    @business_report.report_img.attach(business_report_img_params[:report_img])
+    @business_report.payment_img.attach(business_report_img_params[:payment_img])
+    
+    respond_to do |format|
+      if @business_report.save
+        format.html { redirect_to @business, notice: 'Business report was successfully created.' }
+        format.json { render :show, status: :created, location: @business }
+      else
+        format.html { redirect_to @business }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /businesses
@@ -262,6 +282,14 @@ class BusinessesController < ApplicationController
     end
     def update_status_params
       params.require(:business).permit(:status, :id, :mail_comment)
+    end
+
+    def business_report_params
+      params.require(:business_report).permit(:title, :comment, :business_id)
+    end
+
+    def business_report_img_params
+      params.require(:business_report).permit(:report_img, :payment_img)
     end
 end
 
