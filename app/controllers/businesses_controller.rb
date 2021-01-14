@@ -1,6 +1,6 @@
 class BusinessesController < ApplicationController
   before_action :set_business, only: [:show, :edit, :update, :destroy]
-  before_action :permission_for_access_level_1, only: [:show, :edit, :index]
+  before_action :permission_for_access_level_1, only: [:show, :new, :edit, :index, :destroy]
 
   # GET /businesses
   # GET /businesses.json

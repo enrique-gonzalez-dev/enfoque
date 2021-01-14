@@ -26,15 +26,15 @@ Rails.application.routes.draw do
   patch 'upload_official_id_img' => 'businesses#upload_official_id_img'
   patch 'upload_agent_proof_img' => 'businesses#upload_agent_proof_img'
   patch 'upload_agent_selfie_img' => 'businesses#upload_agent_selfie_img'
-  
-  
+
+
   patch 'upload_ine_id_img' => 'applicants#upload_ine_id_img'
   patch 'upload_cedule_id_img' => 'applicants#upload_cedule_id_img'
   patch 'upload_address_proof_img' => 'applicants#upload_address_proof_img'
-  
+
   patch 'update_applicant_status' => 'applicants#update_applicant_status'
   patch 'update_status' => 'businesses#update_status'
-  
+
   get 'registry_success' => 'businesses#registry_success'
   get 'registry_applicant_success' => 'applicants#registry_applicant_success'
 
@@ -46,8 +46,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     post 'update_info', to: 'registrations#update_info'
   end
-
-  match 'register' => 'users#new_register', via: [:get]
 
   #resources :users, :only => [] do
   resources :users do
@@ -61,7 +59,7 @@ Rails.application.routes.draw do
 
 
   get 'applicant_profile' => 'applicants#profile'
-  
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'pages#home'
 end

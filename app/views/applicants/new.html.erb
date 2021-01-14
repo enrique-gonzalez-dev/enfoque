@@ -1,5 +1,7 @@
-<%= render "helpers/bread", index: businesses_path, iname: "Becarios", current: "Registar becario" %>
-<section class="card mb-3">
+<% if current_user %>
+  <%= render "helpers/bread", index: businesses_path, iname: "Becarios", current: "Registar becario" %>
+<% end %>
+  <section class="card mb-3">
     <div class="card-header card-header-lg py-3 mb-3">
         <h4>Registrar becario</h4>
     </div>

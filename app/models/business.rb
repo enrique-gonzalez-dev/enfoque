@@ -17,7 +17,7 @@ class Business < ApplicationRecord
     has_one_attached :agent_selfie
 
     validates :name, presence: true
-    validates :name, length: { minimum: 10, message: "El nombre es demasiado corto" }
+    validates :name, length: { minimum: 4, message: "El nombre es demasiado corto" }
     validates :phone, presence: true
     validates :phone, numericality: { message: "El teléfono solo debe incluir numeros"}
     validates :phone, length: { minimum: 10, message: "El teléfono debe incluir 10 digitos" }

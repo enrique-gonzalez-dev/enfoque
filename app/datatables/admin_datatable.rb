@@ -19,10 +19,10 @@ class AdminDatatable < AjaxDatatablesRails::ActiveRecord
 
     @view_columns ||= {
       id: { source: "Admin.id" },
-      name: { source: "User.first_name", cond: filter_custom_condition },
-      phone: { source: "User.phone" },
-      status: { source: "User.is_active" },
+      name: { source: "User.first_name" },
       email: { source: "User.email" },
+      status: { source: "User.is_active" },
+      actions: {}
     }
   end
 
@@ -31,7 +31,6 @@ class AdminDatatable < AjaxDatatablesRails::ActiveRecord
       {
         id: record.id,
         name: record.user.fullname,
-        phone: record.user.try(:phone),
         email: record.user.try(:email),
         status: status_badge(record.user.try(:is_active)),
         actions: show_edit_destroy(record.id,false,"edit")  ,
