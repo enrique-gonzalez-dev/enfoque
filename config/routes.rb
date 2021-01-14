@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :business_reports
 
   post 'create_business_report' => 'businesses#create_business_report'
-
+  patch 'upload_report_img' => 'business_reports#upload_report_img'
+  patch 'upload_payment_img' => 'business_reports#upload_payment_img'
+  
 
   resources :applicants do
     collection do

@@ -1,6 +1,14 @@
-<h1>Editing Business Report</h1>
-
-<%= render 'form', business_report: @business_report %>
-
-<%= link_to 'Show', @business_report %> |
-<%= link_to 'Back', business_reports_path %>
+<%= render "helpers/bread", index: business_reports_path, iname: "#{@business_report.title}", current: "Editar" %>
+<section class="card">
+  <div class="card-header py-3 px-3">
+    <h4>
+      <strong>Editar reporte</strong>
+    </h4>
+  </div>
+  <div class="card-body px-5">
+    <%= render 'form_edit', business_report: @business_report %>
+    <%= link_to 'Cancelar', business_reports_path, class: "btn btn-danger" %>
+    </div>
+    </div>
+  </div>
+</section>

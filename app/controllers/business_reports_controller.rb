@@ -68,6 +68,14 @@ class BusinessReportsController < ApplicationController
     end
   end
 
+  def upload_report_img
+  
+  end
+  
+  def upload_payment_img
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_business_report
