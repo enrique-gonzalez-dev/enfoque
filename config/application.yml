@@ -9,7 +9,7 @@ development:
 
 production:
  <<: *default
- app_url: http://142.93.27.65/
+ app_url: http://enfoqueglobalmx.com/
 
 qa:
  <<: *default
