@@ -12,7 +12,9 @@ class Business < ApplicationRecord
     has_one_attached :external_img
     has_one_attached :proof_residency
 
+    has_one_attached :notarial_document
     has_one_attached :official_id
+    has_one_attached :official_back_id
     has_one_attached :agent_proof
     has_one_attached :agent_selfie
 

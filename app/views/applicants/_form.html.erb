@@ -3,21 +3,14 @@
 <%= form_with(model: applicant, local: true) do |f| %>
 
   <p style="margin-left: -1rem;" class="py-2"><strong>Información Becario</strong></p>
-  <div class="form-group">
-	<label class="row form-control-label"><strong>Declaracion</strong></label>
-	<div class="row">
-		<div class="checkbox-toggle -large d-flex justify-content-between">
-				<%= f.check_box(:protest, {:id=> 'protest_switch', :checked => false, class: "align-self-center"}) %>
-			<label class="ml-3" for="protest_switch">Confirmo que por el momento NO ESTUDIO y NO TRABAJO, con el fin de poder ser candidato para el programa de Jóvenes Construyendo el Futuro.</label>
-		</div>
-	</div>
-</div>
+  
   <%= render "helpers/text_input_register", f: f, label: "Nombre completo", field: "name", req: true%>
+  <%= render "helpers/text_input_register", f: f, label: "Nombre del negocio donde te capacitarás", field: "business_prospect"%>
   <div class="form-group" >
-    <label class="row form-control-label">Fecha de nacimiento<span >*</span></label>
+    <label class="row form-control-label">Fecha de nacimiento<span ></span></label>
     <div class="row">
       <div class='input-group date'>
-        <%= f.text_field(:birthday, class: "form-control daterange", value: date_to_picker_format(f.object.birthday), required: true) %>
+        <%= f.text_field(:birthday, class: "form-control daterange", value: date_to_picker_format(f.object.birthday)) %>
         <span class="input-group-append">
           <span class="input-group-text"><i class="i-Timer1"></i></span>
         </span>
@@ -27,6 +20,7 @@
   <p style="margin-left: -1rem;" class="py-2"><strong>Domicilio</strong></p>
   <%= render "helpers/text_input_register", f: f, label: "Calle", field: "street" %>
   <%= render "helpers/text_input_register", f: f, label: "Número exterior", field: "number" %>
+  <%= render "helpers/text_input_register", f: f, label: "Número interior", field: "inside_number" %>
   <%= render "helpers/text_input_register", f: f, label: "Colonia", field: "colony" %>
 
   <div class="form-group ">
@@ -74,8 +68,8 @@
   
   <p style="margin-left: -1rem;" class="py-2"><strong>Documentos</strong></p>
 
-  <%= render "helpers/input_file_search", f: f, id: "ine-id-img", field: "ine_id", label: "Foto de INE (ambos lados)" %>
-  <%= render "helpers/input_file_search", f: f, id: "cedule-id-img", field: "cedule_id", label: "Foto o PDF de tu CURP" %>
+  <%= render "helpers/input_file_search", f: f, id: "ine-id-img", field: "ine_id", label: "Foto de INE (frente)" %>
+  <%= render "helpers/input_file_search", f: f, id: "cedule-id-img", field: "cedule_id", label: "Foto de INE (reverso)" %>
   <%= render "helpers/input_file_search", f: f, id: "address-proof-img", field: "address_proof", label: "Comprobante de Domicilio (no mayor a 3 meses de antigüedad)" %>
   
   <%= render "helpers/textarea_input_register", f: f, label: "Comentarios", field: "comments" %>
