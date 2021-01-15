@@ -13,7 +13,10 @@
 
   <p style="" class="py-2"><strong>Domicilio del centro de trabajo</strong></p>
   
-  <%= render "helpers/text_input", f: f, label: "Dirección(Calle y número)", field: "street" %>
+  <%= render "helpers/text_input", f: f, label: "Calle", field: "street" %>
+  <%= render "helpers/text_input", f: f, label: "Número exterior", field: "number" %>
+  <%= render "helpers/text_input", f: f, label: "Número interior", field: "inside_number" %>
+  <%= render "helpers/text_input", f: f, label: "Calle", field: "street" %>
   <%= render "helpers/text_input", f: f, label: "Colonia", field: "colony" %>
   <div class="form-group row ">
 		<label class="col-sm-2 form-control-label">Estado</label>
