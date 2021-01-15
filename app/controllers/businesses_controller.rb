@@ -143,6 +143,37 @@ class BusinessesController < ApplicationController
       end
     end
   end
+
+  def upload_official_back_id_img
+    @business = Business.find(upload_official_back_id_img_params[:id])
+    @business.official_back_id.attach(upload_official_back_id_img_params[:official_back_id])
+    @business.status = 0
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_notarial_document_img
+    @business = Business.find(upload_notarial_document_img_params[:id])
+    @business.notarial_document.attach(upload_notarial_document_img_params[:notarial_document])
+    @business.status = 0
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def upload_agent_proof_img
     @business = Business.find(upload_agent_proof_img_params[:id])
     @business.agent_proof.attach(upload_agent_proof_img_params[:agent_proof])
@@ -249,6 +280,14 @@ class BusinessesController < ApplicationController
     def upload_official_id_img_params
       params.require(:business).permit(:official_id, :id)
     end
+
+    def upload_official_back_id_img_params
+      params.require(:business).permit(:official_back_id, :id)
+    end
+    def upload_notarial_document_img_params
+      params.require(:business).permit(:notarial_document, :id)
+    end
+
     def upload_agent_proof_img_params
       params.require(:business).permit(:agent_proof, :id)
     end

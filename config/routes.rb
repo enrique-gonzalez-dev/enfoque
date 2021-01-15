@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   patch 'upload_external_img' => 'businesses#upload_external_img'
   patch 'upload_proof_residency_img' => 'businesses#upload_proof_residency_img'
   patch 'upload_official_id_img' => 'businesses#upload_official_id_img'
+  patch 'upload_official_back_id_img' => 'businesses#upload_official_back_id_img'
+  patch 'upload_notarial_document_img' => 'businesses#upload_notarial_document_img'
   patch 'upload_agent_proof_img' => 'businesses#upload_agent_proof_img'
   patch 'upload_agent_selfie_img' => 'businesses#upload_agent_selfie_img'
 

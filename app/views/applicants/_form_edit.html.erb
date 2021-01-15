@@ -19,6 +19,7 @@
   <p style="margin-left: -1rem;" class="py-2"><strong>Domicilio</strong></p>
   <%= render "helpers/text_input", f: f, label: "Calle", field: "street" %>
   <%= render "helpers/text_input", f: f, label: "Número exterior", field: "number" %>
+  <%= render "helpers/text_input", f: f, label: "Número interior", field: "inside_number" %>
   <%= render "helpers/text_input", f: f, label: "Colonia", field: "colony" %>
 
   <div class="form-group row">
@@ -68,8 +69,10 @@
 
   <%= render "helpers/textarea_input", f: f, label: "Comentarios", field: "comments" %>
   
-  <div class="actions" >
-    <%= f.submit "Actializar", class: "btn btn-warning my-4", style: "margin-left: -1rem;" %>
+  <div class="actions d-inline" >
+    <%= f.submit "Actualizar", class: "btn btn-warning my-4", style: "margin-left: -1rem;" %>
+    <%= link_to "Cancelar" , @applicant , class: "btn btn-danger" %>
+    
   </div>
 <% end %>
 

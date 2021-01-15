@@ -28,6 +28,7 @@
         <div class="row">
           <%= render "helpers/text_show", icon: "i-Address-Book", n: "Calle" , v: @applicant.street %>
           <%= render "helpers/text_show", icon: "i-Address-Book", n: "Numero exterior" , v: @applicant.number %>
+          <%= render "helpers/text_show", icon: "i-Address-Book", n: "Numero interior" , v: @applicant.inside_number %>
           <%= render "helpers/text_show", icon: "i-Address-Book", n: "Colonia" , v: @applicant.colony %>
           <%= render "helpers/text_show", icon: "i-Address-Book", n: "Municipio" , v: City.find(@applicant.city_id).name if @applicant.city_id.present? %>
           <%= render "helpers/text_show", icon: "i-Address-Book", n: "Estado" , v: State.find(@applicant.state_id).name if @applicant.state_id.present? %>
@@ -65,13 +66,13 @@
                 <div class="fm-file-icon">
                   <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
                 </div>
-                <div class="fm-file-name">INE (Ambos lados)</div>
+                <div class="fm-file-name">INE (frente)</div>
                 <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_ine_id_input').click()" id="upload_ine_id_img"> Cargar imagen</button></div>
               </div>
             <% else %>
               <div class="row">
                 <div class="col-12">
-                  <%= render "helpers/file_info", doc: @applicant.ine_id, title: "INE (ambos lados)", download:true %>
+                  <%= render "helpers/file_info", doc: @applicant.ine_id, title: "INE (frente)", download:true %>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                   <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_ine_id_input').click()" id="upload_ine_id_img"> 
@@ -91,13 +92,13 @@
                 <div class="fm-file-icon">
                   <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
                 </div>
-                <div class="fm-file-name">CURP</div>
+                <div class="fm-file-name">INE (reverso)</div>
                 <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_cedule_id_input').click()" id="upload_cedule_id_img"> Cargar imagen</button></div>
               </div>
             <% else %>
               <div class="row">
                 <div class="col-12">
-                  <%= render "helpers/file_info", doc: @applicant.cedule_id, title: "CURP", download:true %>
+                  <%= render "helpers/file_info", doc: @applicant.cedule_id, title: "INE (reverso)", download:true %>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                   <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_cedule_id_input').click()" id="upload_cedule_id_img"> 
