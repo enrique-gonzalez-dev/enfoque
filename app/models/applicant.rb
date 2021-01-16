@@ -1,8 +1,15 @@
 class Applicant < ApplicationRecord
     enum school_grade: [:Primaria, :Secundaria, :Preparatoria, :Universidad]
+    has_many :applicant_reports
+
+
     has_one_attached :cedule_id
     has_one_attached :address_proof
     has_one_attached :ine_id
+    
+    has_one_attached :feedback_1
+    has_one_attached :feedback_2
+    has_one_attached :feedback_3
     
     has_one :state
     has_one :city
@@ -13,4 +20,5 @@ class Applicant < ApplicationRecord
     validates :phone, numericality: { message: "El teléfono solo debe incluir numeros"}
     validates :phone, length: { minimum: 10, message: "El teléfono debe incluir 10 digitos" }
     validates :email, presence: true
+
 end

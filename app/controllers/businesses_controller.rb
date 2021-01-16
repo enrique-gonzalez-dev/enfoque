@@ -32,7 +32,6 @@ class BusinessesController < ApplicationController
   end
 
   def create_business_report
-    debugger
     @business = Business.find(business_report_params[:business_id])
     @business_report = BusinessReport.new(business_report_params)
     @business_report.report_img.attach(business_report_img_params[:report_img])
@@ -208,10 +207,123 @@ class BusinessesController < ApplicationController
       end
     end
   end
+
   def upload_agent_selfie_img
     @business = Business.find(upload_agent_selfie_img_params[:id])
     @business.agent_selfie.attach(upload_agent_selfie_img_params[:agent_selfie])
     @business.status = 0
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def upload_feedback_1_img
+    @business = Business.find(upload_feedback_1_img_params[:id])
+    @business.feedback_1.attach(upload_feedback_1_img_params[:feedback_1])
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def upload_feedback_2_img
+    @business = Business.find(upload_feedback_2_img_params[:id])
+    @business.feedback_2.attach(upload_feedback_2_img_params[:feedback_2])
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_feedback_3_img
+    @business = Business.find(upload_feedback_3_img_params[:id])
+    @business.feedback_3.attach(upload_feedback_3_img_params[:feedback_3])
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_agreement_img
+    @business = Business.find(upload_agreement_img_params[:id])
+    @business.agreement.attach(upload_agreement_img_params[:agreement])
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def upload_advance_payment_img
+    @business = Business.find(upload_advance_payment_img_params[:id])
+    @business.advance_payment.attach(upload_advance_payment_img_params[:advance_payment])
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def upload_training_plan_img
+    @business = Business.find(upload_training_plan_img_params[:id])
+    @business.training_plan.attach(upload_training_plan_img_params[:training_plan])
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_verified_business_img
+    @business = Business.find(upload_verified_business_img_params[:id])
+    @business.verified_business.attach(upload_verified_business_img_params[:verified_business])
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_settlement_payment_img
+    @business = Business.find(upload_settlement_payment_img_params[:id])
+    @business.settlement_payment.attach(upload_settlement_payment_img_params[:settlement_payment])
     respond_to do |format|
       if @business.save
         format.html { redirect_to @business, notice: 'Imagen guardada correctamente' }
@@ -315,6 +427,33 @@ class BusinessesController < ApplicationController
       params.require(:business).permit(:agent_selfie, :id)
     end
     
+    def upload_feedback_1_img_params
+      params.require(:business).permit(:feedback_1, :id)
+    end
+    def upload_feedback_2_img_params
+      params.require(:business).permit(:feedback_2, :id)
+    end
+    def upload_feedback_3_img_params
+      params.require(:business).permit(:feedback_3, :id)
+    end
+    def upload_training_plan_img_params
+      params.require(:business).permit(:training_plan, :id)
+    end
+
+    def upload_agreement_img_params
+      params.require(:business).permit(:agreement, :id)
+    end
+
+    def upload_advance_payment_img_params
+      params.require(:business).permit(:advance_payment, :id)
+    end
+
+    def upload_verified_business_img_params
+      params.require(:business).permit(:verified_business, :id)
+    end
+    def upload_settlement_payment_img_params
+      params.require(:business).permit(:settlement_payment, :id)
+    end
     
     def business_documents_params
       params.require(:business).permit(:taxes_id, :internal_img, :external_img, :proof_residency, :official_id, :agent_proof, :agent_selfie)

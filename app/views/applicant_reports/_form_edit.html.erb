@@ -1,0 +1,21 @@
+<%= render 'layouts/messages', :obj => @applicant_report %>
+<%= render 'layouts/errors', :obj => @applicant_report %>
+<%= form_with(model: applicant_report, local: true) do |f| %>
+  <%= render "helpers/text_input", f: f, label: "Reporte", field: "title" %>
+  <div class="form-group row">
+		<label class="col-2 form-control-label">Centro de trabajo</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+    <% if @applicant_report.applicant_id.nil? %>
+      <%= f.collection_select(:applicant_id, Applicant.where(status: 1).order(:name), :id, :name, {:prompt => 'Seleccione un centro de trabajo'}, {:class => "selectpicker form-control", 'data-live-search' => "true"}) %>
+    <% else %>
+      <%= f.collection_select(:applicant_id, Applicant.where(status: 1).order(:name), :id, :name, {:prompt => 'Seleccione un centro de trabajo'}, {:class => "selectpicker form-control", 'data-live-search' => "true", :disabled => true}) %>
+    <% end %>
+    </div>
+  </div>
+  <%= render "helpers/text_input", f: f, label: "Comentarios", field: "comment" %>
+  
+  <div class="actions">
+    <div class="row d-inline">
+      <%= f.submit "Guardar", class: "btn btn-success ml-2" %>
+    
+<% end %>

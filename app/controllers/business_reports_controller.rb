@@ -1,5 +1,7 @@
 class BusinessReportsController < ApplicationController
   before_action :set_business_report, only: [:show, :edit, :update, :destroy]
+  before_action :permission_for_access_level_1
+
 
   # GET /business_reports
   # GET /business_reports.json
@@ -35,7 +37,7 @@ class BusinessReportsController < ApplicationController
 
     respond_to do |format|
       if @business_report.save
-        format.html { redirect_to @business_report, notice: 'Business report was successfully created.' }
+        format.html { redirect_to @business_report, notice: 'Reporte creado correctamente.' }
         format.json { render :show, status: :created, location: @business_report }
       else
         format.html { render :new }
@@ -49,7 +51,7 @@ class BusinessReportsController < ApplicationController
   def update
     respond_to do |format|
       if @business_report.update(business_report_params)
-        format.html { redirect_to @business_report, notice: 'Business report was successfully updated.' }
+        format.html { redirect_to @business_report, notice: 'Reporte actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @business_report }
       else
         format.html { render :edit }
@@ -63,18 +65,38 @@ class BusinessReportsController < ApplicationController
   def destroy
     @business_report.destroy
     respond_to do |format|
-      format.html { redirect_to business_reports_url, notice: 'Business report was successfully destroyed.' }
+      format.html { redirect_to business_reports_url, notice: 'Reporte eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
 
   def upload_report_img
-  
+    @business_report = BusinessReport.find(upload_report_img_params[:id])
+    @business_report.report_img.attach(upload_report_img_params[:report_img])
+    respond_to do |format|
+      if @business_report.save
+        format.html { redirect_to @business_report, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business_report }
+      else
+        format.html { render :show }
+        format.json { render json: @business_report.errors, status: :unprocessable_entity }
+      end
+    end
   end
-  
   def upload_payment_img
-    
+    @business_report = BusinessReport.find(upload_payment_img_params[:id])
+    @business_report.payment_img.attach(upload_payment_img_params[:payment_img])
+    respond_to do |format|
+      if @business_report.save
+        format.html { redirect_to @business_report, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @business_report }
+      else
+        format.html { render :show }
+        format.json { render json: @business_report.errors, status: :unprocessable_entity }
+      end
+    end
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -89,5 +111,11 @@ class BusinessReportsController < ApplicationController
 
     def business_report_img_params
       params.require(:business_report).permit(:report_img, :payment_img)
+    end
+    def upload_report_img_params
+      params.require(:business_report).permit(:report_img, :id)
+    end
+    def upload_payment_img_params
+      params.require(:business_report).permit(:payment_img, :id)
     end
 end

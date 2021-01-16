@@ -1,0 +1,83 @@
+<%= render "helpers/panel_header_edit_destroy", edit: edit_applicant_path(@applicant), title: "" %>
+
+<p><strong>Documentos del becario</strong></p>
+<div class="row">
+  <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+    <%= form_for @applicant, id: "upload_ine_id_img_form" , :url => { :action => 'upload_ine_id_img'}, :html => { id: "upload_ine_id_form"} do |form|%>
+      <%= form.hidden_field :id, value: @applicant.id%>
+      <%= form.file_field :ine_id, id: "upload_ine_id_input", class: "form-control", hidden: "true" %>
+    <% end %>
+    <% if @applicant.ine_id.attachment.nil? %>
+      <div class="fm-file missing">
+        <div class="fm-file-icon">
+          <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+        </div>
+        <div class="fm-file-name">INE (frente)</div>
+        <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_ine_id_input').click()" id="upload_ine_id_img"> Cargar imagen</button></div>
+      </div>
+    <% else %>
+      <div class="row">
+        <div class="col-12">
+          <%= render "helpers/file_info", doc: @applicant.ine_id, title: "INE (frente)", download:true %>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_ine_id_input').click()" id="upload_ine_id_img"> 
+            Cambiar imagen
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+    <%= form_for @applicant, id: "upload_cedule_id_img_form" , :url => { :action => 'upload_cedule_id_img'}, :html => { id: "upload_cedule_id_form"} do |form|%>
+      <%= form.hidden_field :id, value: @applicant.id%>
+      <%= form.file_field :cedule_id, id: "upload_cedule_id_input", class: "form-control", hidden: "true" %>
+    <% end %>
+    <% if @applicant.cedule_id.attachment.nil? %>
+      <div class="fm-file missing">
+        <div class="fm-file-icon">
+          <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+        </div>
+        <div class="fm-file-name">INE (reverso)</div>
+        <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_cedule_id_input').click()" id="upload_cedule_id_img"> Cargar imagen</button></div>
+      </div>
+    <% else %>
+      <div class="row">
+        <div class="col-12">
+          <%= render "helpers/file_info", doc: @applicant.cedule_id, title: "INE (reverso)", download:true %>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_cedule_id_input').click()" id="upload_cedule_id_img"> 
+            Cambiar imagen
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+    <%= form_for @applicant, id: "upload_address_proof_img_form" , :url => { :action => 'upload_address_proof_img'}, :html => { id: "upload_address_proof_form"} do |form|%>
+      <%= form.hidden_field :id, value: @applicant.id%>
+      <%= form.file_field :address_proof, id: "upload_address_proof_input", class: "form-control", hidden: "true" %>
+    <% end %>
+    <% if @applicant.address_proof.attachment.nil? %>
+      <div class="fm-file missing">
+        <div class="fm-file-icon">
+          <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+        </div>
+        <div class="fm-file-name">Comprobante de domicilio</div>
+        <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#upload_address_proof_input').click()" id="upload_address_proof_img"> Cargar imagen</button></div>
+      </div>
+    <% else %>
+      <div class="row">
+        <div class="col-12">
+          <%= render "helpers/file_info", doc: @applicant.address_proof, title: "Comprobante de domicilio", download:true %>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" class="my-3 btn btn-primary" onclick="$('#upload_address_proof_input').click()" id="upload_address_proof_img"> 
+            Cambiar imagen
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

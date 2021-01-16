@@ -141,6 +141,48 @@ class ApplicantsController < ApplicationController
     end
   end
 
+  def upload_feedback_1_img
+    @applicant = Applicant.find(upload_feedback_1_img_params[:id])
+    @applicant.feedback_1.attach(upload_feedback_1_img_params[:feedback_1])
+    respond_to do |format|
+      if @applicant.save
+        format.html { redirect_to @applicant, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @applicant }
+      else
+        format.html { render :show }
+        format.json { render json: @applicant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_feedback_2_img
+    @applicant = Applicant.find(upload_feedback_2_img_params[:id])
+    @applicant.feedback_2.attach(upload_feedback_2_img_params[:feedback_1])
+    respond_to do |format|
+      if @applicant.save
+        format.html { redirect_to @applicant, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @applicant }
+      else
+        format.html { render :show }
+        format.json { render json: @applicant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_feedback_3_img
+    @applicant = Applicant.find(upload_feedback_3_img_params[:id])
+    @applicant.feedback_3.attach(upload_feedback_3_img_params[:feedback_3])
+    respond_to do |format|
+      if @applicant.save
+        format.html { redirect_to @applicant, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @applicant }
+      else
+        format.html { render :show }
+        format.json { render json: @applicant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_applicant
@@ -166,5 +208,15 @@ class ApplicantsController < ApplicationController
     end
     def update_applicant_status_params
       params.require(:applicant).permit(:status, :id, :mail_comment)
+    end
+
+    def upload_feedback_1_img_params
+      params.require(:applicant).permit(:feedback_1, :id)
+    end
+    def upload_feedback_2_img_params
+      params.require(:applicant).permit(:feedback_2, :id)
+    end
+    def upload_feedback_3_img_params
+      params.require(:applicant).permit(:feedback_3, :id)
     end
 end

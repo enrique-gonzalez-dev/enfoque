@@ -1,0 +1,34 @@
+<%= render "helpers/panel_header_edit_destroy", edit: edit_applicant_path(@applicant), title: "" %>
+
+<div class="row">
+  <%= render "helpers/text_show",icon: "i-Checked-User", n: "Nombre completo" , v: @applicant.name %>
+  <%= render "helpers/text_show",icon: "i-Calendar", n: "Fecha de nacimiento" , v: @applicant.birthday %>
+</div>
+<hr>
+<p class="mt-3"><strong>Domicilio</strong></p>
+<div class="row">
+  <%= render "helpers/text_show", icon: "i-Address-Book", n: "Calle" , v: @applicant.street %>
+  <%= render "helpers/text_show", icon: "i-Address-Book", n: "Numero exterior" , v: @applicant.number %>
+  <%= render "helpers/text_show", icon: "i-Address-Book", n: "Numero interior" , v: @applicant.inside_number %>
+  <%= render "helpers/text_show", icon: "i-Address-Book", n: "Colonia" , v: @applicant.colony %>
+  <%= render "helpers/text_show", icon: "i-Address-Book", n: "Municipio" , v: City.find(@applicant.city_id).name if @applicant.city_id.present? %>
+  <%= render "helpers/text_show", icon: "i-Address-Book", n: "Estado" , v: State.find(@applicant.state_id).name if @applicant.state_id.present? %>
+  <%= render "helpers/text_show", icon: "i-Address-Book", n: "Código postal", v: @applicant.zip_code %>
+</div>
+<hr>
+<p class="mt-3"><strong>Datos becario</strong></p>
+<div class="row">
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Clave de Elector", v: @applicant.id_code %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "CURP", v: @applicant.curp_code %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Telefono celular", v: @applicant.phone %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Correo electrónico", v: @applicant.email %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Perfil de Facebook", v: @applicant.social_profile %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Nivel de estudios", v: @applicant.school_grade %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Institución Académica de últimos estudios", v: @applicant.school %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Fecha de término de Estudios", v: @applicant.finish_date %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Nombre de algún familiar", v: @applicant.familiar_fullname %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Parentezco con el familiar", v: @applicant.familiar_relationship %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Teléfono del familiar", v: @applicant.familiar_phone %>
+  <%= render "helpers/text_show", icon: "i-File-Horizontal-Text", n: "Comentarios", v: @applicant.comments %>
+</div>
+

@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
 
+  resources :applicant_reports
   resources :business_reports
 
   post 'create_business_report' => 'businesses#create_business_report'
+
   patch 'upload_report_img' => 'business_reports#upload_report_img'
   patch 'upload_payment_img' => 'business_reports#upload_payment_img'
   
+  patch 'upload_applicant_report_img' => 'applicant_reports#upload_report_img'
+  patch 'upload_applicant_payment_img' => 'applicant_reports#upload_payment_img'
 
   resources :applicants do
     collection do
@@ -28,8 +32,23 @@ Rails.application.routes.draw do
   patch 'upload_notarial_document_img' => 'businesses#upload_notarial_document_img'
   patch 'upload_agent_proof_img' => 'businesses#upload_agent_proof_img'
   patch 'upload_agent_selfie_img' => 'businesses#upload_agent_selfie_img'
+  #feedback
+  patch 'upload_feedback_1_img' => 'businesses#upload_feedback_1_img'
+  patch 'upload_feedback_2_img' => 'businesses#upload_feedback_2_img'
+  patch 'upload_feedback_3_img' => 'businesses#upload_feedback_3_img'
+  patch 'upload_training_plan_img' => 'businesses#upload_training_plan_img'
+  
+  patch 'upload_applicant_feedback_1_img' => 'applicants#upload_feedback_1_img'
+  patch 'upload_applicant_feedback_2_img' => 'applicants#upload_feedback_2_img'
+  patch 'upload_applicant_feedback_3_img' => 'applicants#upload_feedback_3_img'
 
+  #agreement
+  patch 'upload_agreement_img' => 'businesses#upload_agreement_img'
+  patch 'upload_advance_payment_img' => 'businesses#upload_advance_payment_img'
+  patch 'upload_verified_business_img' => 'businesses#upload_verified_business_img'
+  patch 'upload_settlement_payment_img' => 'businesses#upload_settlement_payment_img'
 
+  
   patch 'upload_ine_id_img' => 'applicants#upload_ine_id_img'
   patch 'upload_cedule_id_img' => 'applicants#upload_cedule_id_img'
   patch 'upload_address_proof_img' => 'applicants#upload_address_proof_img'

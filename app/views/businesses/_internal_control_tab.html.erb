@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+      <%= form_for @business, id: "agreement_img_form" , :url => { :action => 'upload_agreement_img'}, :html => { id: "agreement_form"} do |form|%>
+        <%= form.hidden_field :id, value: @business.id%>
+        <%= form.file_field :agreement, id: "agreement_input", class: "form-control", hidden: "true" %>
+      <% end %>
+      <% if @business.agreement.attachment.nil? %>
+        <div class="fm-file missing">
+          <div class="fm-file-icon">
+            <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+          </div>
+          <div class="fm-file-name">Ficha Técnica y convenio</div>
+          <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#agreement_input').click()" id="agreement_img"> Cargar imagen</button></div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <%= render "helpers/file_info", doc: @business.agreement, title: "Ficha Técnica y convenio", download:true %>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <button type="button" class="my-3 btn btn-primary" onclick="$('#agreement_input').click()" id="agreement_img"> 
+              Cambiar imagen
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+      <%= form_for @business, id: "advance_payment_img_form" , :url => { :action => 'upload_advance_payment_img'}, :html => { id: "advance_payment_form"} do |form|%>
+        <%= form.hidden_field :id, value: @business.id%>
+        <%= form.file_field :advance_payment, id: "advance_payment_input", class: "form-control", hidden: "true" %>
+      <% end %>
+      <% if @business.advance_payment.attachment.nil? %>
+        <div class="fm-file missing">
+          <div class="fm-file-icon">
+            <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+          </div>
+          <div class="fm-file-name">Pago de anticipo</div>
+          <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#advance_payment_input').click()" id="advance_payment_img"> Cargar imagen</button></div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <%= render "helpers/file_info", doc: @business.advance_payment, title: "Pago de anticipo", download:true %>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <button type="button" class="my-3 btn btn-primary" onclick="$('#advance_payment_input').click()" id="advance_payment_img"> 
+              Cambiar imagen
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+      <%= form_for @business, id: "verified_business_img_form" , :url => { :action => 'upload_verified_business_img'}, :html => { id: "verified_business_form"} do |form|%>
+        <%= form.hidden_field :id, value: @business.id%>
+        <%= form.file_field :verified_business, id: "verified_business_input", class: "form-control", hidden: "true" %>
+      <% end %>
+      <% if @business.verified_business.attachment.nil? %>
+        <div class="fm-file missing">
+          <div class="fm-file-icon">
+            <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+          </div>
+          <div class="fm-file-name">Empresa Verificada Correctamente</div>
+          <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#verified_business_input').click()" id="verified_business_img"> Cargar imagen</button></div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <%= render "helpers/file_info", doc: @business.verified_business, title: "Empresa Verificada Correctamente", download:true %>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <button type="button" class="my-3 btn btn-primary" onclick="$('#verified_business_input').click()" id="verified_business_img"> 
+              Cambiar imagen
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+      <%= form_for @business, id: "settlement_payment_img_form" , :url => { :action => 'upload_settlement_payment_img'}, :html => { id: "settlement_payment_form"} do |form|%>
+        <%= form.hidden_field :id, value: @business.id%>
+        <%= form.file_field :settlement_payment, id: "settlement_payment_input", class: "form-control", hidden: "true" %>
+      <% end %>
+      <% if @business.settlement_payment.attachment.nil? %>
+        <div class="fm-file missing">
+          <div class="fm-file-icon">
+            <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+          </div>
+          <div class="fm-file-name">Pago de finiquito</div>
+          <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#settlement_payment_input').click()" id="settlement_payment_img"> Cargar imagen</button></div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <%= render "helpers/file_info", doc: @business.settlement_payment, title: "Pago de finiquito", download:true %>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <button type="button" class="my-3 btn btn-primary" onclick="$('#settlement_payment_input').click()" id="settlement_payment_img"> 
+              Cambiar imagen
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#agreement_input").change(function(){
+    $("#agreement_form").submit();
+  });
+  $("#advance_payment_input").change(function(){
+    $("#advance_payment_form").submit();
+  });
+  
+  $("#verified_business_input").change(function(){
+    $("#verified_business_form").submit();
+  });
+  $("#settlement_payment_input").change(function(){
+    $("#settlement_payment_form").submit();
+  });
+  
+});
+  </script>

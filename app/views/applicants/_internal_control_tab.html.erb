@@ -1,0 +1,92 @@
+<div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+  <%= form_for @applicant, id: "feedback_1_img_form" , :url => { :action => 'upload_applicant_feedback_1_img'}, :html => { id: "feedback_1_form"} do |form|%>
+    <%= form.hidden_field :id, value: @applicant.id%>
+    <%= form.file_field :feedback_1, id: "feedback_1_input", class: "form-control", hidden: "true" %>
+  <% end %>
+  <% if @applicant.feedback_1.attachment.nil? %>
+    <div class="fm-file missing">
+      <div class="fm-file-icon">
+        <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+      </div>
+      <div class="fm-file-name">Retroalimentación 1</div>
+      <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#feedback_1_input').click()" id="feedback_1_img"> Cargar imagen</button></div>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <%= render "helpers/file_info", doc: @applicant.feedback_1, title: "Retroalimentación 1", download:true %>
+      </div>
+      <div class="col-12 d-flex justify-content-center">
+        <button type="button" class="my-3 btn btn-primary" onclick="$('#feedback_1_input').click()" id="feedback_1_img"> 
+          Cambiar imagen
+        </button>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+  <%= form_for @applicant, id: "feedback_2_img_form" , :url => { :action => 'upload_applicant_feedback_2_img'}, :html => { id: "feedback_2_form"} do |form|%>
+    <%= form.hidden_field :id, value: @applicant.id%>
+    <%= form.file_field :feedback_2, id: "feedback_2_input", class: "form-control", hidden: "true" %>
+  <% end %>
+  <% if @applicant.feedback_2.attachment.nil? %>
+    <div class="fm-file missing">
+      <div class="fm-file-icon">
+        <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+      </div>
+      <div class="fm-file-name">Retroalimentación 1</div>
+      <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#feedback_2_input').click()" id="feedback_2_img"> Cargar imagen</button></div>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <%= render "helpers/file_info", doc: @applicant.feedback_2, title: "Retroalimentación 1", download:true %>
+      </div>
+      <div class="col-12 d-flex justify-content-center">
+        <button type="button" class="my-3 btn btn-primary" onclick="$('#feedback_2_input').click()" id="feedback_2_img"> 
+          Cambiar imagen
+        </button>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+  <%= form_for @applicant, id: "feedback_3_img_form" , :url => { :action => 'upload_applicant_feedback_3_img'}, :html => { id: "feedback_3_form"} do |form|%>
+    <%= form.hidden_field :id, value: @applicant.id%>
+    <%= form.file_field :feedback_3, id: "feedback_3_input", class: "form-control", hidden: "true" %>
+  <% end %>
+  <% if @applicant.feedback_3.attachment.nil? %>
+    <div class="fm-file missing">
+      <div class="fm-file-icon">
+        <img src="<%= asset_path('theme/system/icons/no-file.png') %>" alt="">
+      </div>
+      <div class="fm-file-name">Retroalimentación 1</div>
+      <div class="fm-file-size"><button type="button" class="mt-5 btn btn-primary" onclick="$('#feedback_3_input').click()" id="feedback_3_img"> Cargar imagen</button></div>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <%= render "helpers/file_info", doc: @applicant.feedback_3, title: "Retroalimentación 1", download:true %>
+      </div>
+      <div class="col-12 d-flex justify-content-center">
+        <button type="button" class="my-3 btn btn-primary" onclick="$('#feedback_3_input').click()" id="feedback_3_img"> 
+          Cambiar imagen
+        </button>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#feedback_1_input").change(function(){
+    $("#feedback_1_form").submit();
+  });
+  $("#feedback_2_input").change(function(){
+    $("#feedback_2_form").submit();
+  });
+  $("#feedback_3_input").change(function(){
+    $("#feedback_3_form").submit();
+  });
+});
+  </script>
