@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :business_reports
 
   post 'create_business_report' => 'businesses#create_business_report'
+  post 'create_applicant_report' => 'applicants#create_applicant_report'
 
   patch 'upload_report_img' => 'business_reports#upload_report_img'
   patch 'upload_payment_img' => 'business_reports#upload_payment_img'
@@ -38,9 +39,11 @@ Rails.application.routes.draw do
   patch 'upload_feedback_3_img' => 'businesses#upload_feedback_3_img'
   patch 'upload_training_plan_img' => 'businesses#upload_training_plan_img'
   
-  patch 'upload_applicant_feedback_1_img' => 'applicants#upload_feedback_1_img'
-  patch 'upload_applicant_feedback_2_img' => 'applicants#upload_feedback_2_img'
-  patch 'upload_applicant_feedback_3_img' => 'applicants#upload_feedback_3_img'
+  patch 'upload_applicant_feedback_1_img' => 'applicants#upload_applicant_feedback_1_img'
+  patch 'upload_applicant_feedback_2_img' => 'applicants#upload_applicant_feedback_2_img'
+  patch 'upload_applicant_feedback_3_img' => 'applicants#upload_applicant_feedback_3_img'
+  patch 'upload_applicant_agreement_img' => 'applicants#upload_applicant_agreement_img'
+  patch 'upload_applicant_management_payment_img' => 'applicants#upload_applicant_management_payment_img'
 
   #agreement
   patch 'upload_agreement_img' => 'businesses#upload_agreement_img'

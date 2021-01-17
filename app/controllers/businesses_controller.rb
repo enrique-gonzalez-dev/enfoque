@@ -39,7 +39,7 @@ class BusinessesController < ApplicationController
     
     respond_to do |format|
       if @business_report.save
-        format.html { redirect_to @business, notice: 'Business report was successfully created.' }
+        format.html { redirect_to @business, notice: 'Reporte creado correctamente' }
         format.json { render :show, status: :created, location: @business }
       else
         format.html { redirect_to @business }

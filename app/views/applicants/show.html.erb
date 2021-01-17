@@ -22,6 +22,9 @@
       <li class="nav-item">
           <a class="nav-link" id="internal-tab" data-toggle="tab" href="#internal_tab" role="tab" aria-controls="profileIcon" aria-selected="false"><i class="nav-icon i-Administrator mr-1"></i>Documentación interna</a>
       </li>
+      <li class="nav-item">
+          <a class="nav-link" id="report-tab" data-toggle="tab" href="#report_tab" role="tab" aria-controls="profileIcon" aria-selected="false"><i class="nav-icon i-Administrator mr-1"></i>Reportes</a>
+      </li>
     </ul>
     <div class="tab-content" id="myIconTabContent">
       <div class="tab-pane fade show active" id="profile_tab" role="tabpanel" aria-labelledby="profile-tab">
@@ -35,6 +38,9 @@
       </div>
       <div class="tab-pane fade" id="internal_tab" role="tabpanel" aria-labelledby="internal-tab">
         <%= render 'internal_control_tab' %>
+      </div>
+      <div class="tab-pane fade" id="report_tab" role="tabpanel" aria-labelledby="report-tab">
+        <%= render 'reports_tab' %>
       </div>
       
     </div>

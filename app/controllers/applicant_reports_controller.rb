@@ -1,5 +1,8 @@
 class ApplicantReportsController < ApplicationController
   before_action :set_applicant_report, only: [:show, :edit, :update, :destroy]
+  before_action :permission_for_access_level_1
+
+
 
   # GET /applicant_reports
   # GET /applicant_reports.json

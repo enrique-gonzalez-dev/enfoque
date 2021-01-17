@@ -15,6 +15,8 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
+    @applicant_report = ApplicantReport.new(applicant_id: @applicant.id)
+    @applicant_reports = ApplicantReport.where(applicant_id: @applicant.id)
   end
 
   # GET /applicants/new
@@ -24,6 +26,23 @@ class ApplicantsController < ApplicationController
 
   # GET /applicants/1/edit
   def edit
+  end
+
+  def create_applicant_report
+    @applicant = Applicant.find(applicant_report_params[:applicant_id])
+    @applicant_report = ApplicantReport.new(applicant_report_params)
+    @applicant_report.report_img.attach(applicant_report_img_params[:report_img])
+    @applicant_report.payment_img.attach(applicant_report_img_params[:payment_img])
+    
+    respond_to do |format|
+      if @applicant_report.save
+        format.html { redirect_to @applicant, notice: 'Reporte creado correctamente' }
+        format.json { render :show, status: :created, location: @applicant }
+      else
+        format.html { redirect_to @applicant }
+        format.json { render json: @applicant.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /applicants
@@ -141,7 +160,7 @@ class ApplicantsController < ApplicationController
     end
   end
 
-  def upload_feedback_1_img
+  def upload_applicant_feedback_1_img
     @applicant = Applicant.find(upload_feedback_1_img_params[:id])
     @applicant.feedback_1.attach(upload_feedback_1_img_params[:feedback_1])
     respond_to do |format|
@@ -155,9 +174,9 @@ class ApplicantsController < ApplicationController
     end
   end
 
-  def upload_feedback_2_img
+  def upload_applicant_feedback_2_img
     @applicant = Applicant.find(upload_feedback_2_img_params[:id])
-    @applicant.feedback_2.attach(upload_feedback_2_img_params[:feedback_1])
+    @applicant.feedback_2.attach(upload_feedback_2_img_params[:feedback_2])
     respond_to do |format|
       if @applicant.save
         format.html { redirect_to @applicant, notice: 'Imagen guardada correctamente' }
@@ -169,9 +188,37 @@ class ApplicantsController < ApplicationController
     end
   end
 
-  def upload_feedback_3_img
+  def upload_applicant_feedback_3_img
     @applicant = Applicant.find(upload_feedback_3_img_params[:id])
     @applicant.feedback_3.attach(upload_feedback_3_img_params[:feedback_3])
+    respond_to do |format|
+      if @applicant.save
+        format.html { redirect_to @applicant, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @applicant }
+      else
+        format.html { render :show }
+        format.json { render json: @applicant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_applicant_agreement_img
+    @applicant = Applicant.find(upload_agreement_img_params[:id])
+    @applicant.agreement.attach(upload_agreement_img_params[:agreement])
+    respond_to do |format|
+      if @applicant.save
+        format.html { redirect_to @applicant, notice: 'Imagen guardada correctamente' }
+        format.json { render :show, status: :ok, location: @applicant }
+      else
+        format.html { render :show }
+        format.json { render json: @applicant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def upload_applicant_management_payment_img
+    @applicant = Applicant.find(upload_management_payment_img_params[:id])
+    @applicant.management_payment.attach(upload_management_payment_img_params[:management_payment])
     respond_to do |format|
       if @applicant.save
         format.html { redirect_to @applicant, notice: 'Imagen guardada correctamente' }
@@ -218,5 +265,19 @@ class ApplicantsController < ApplicationController
     end
     def upload_feedback_3_img_params
       params.require(:applicant).permit(:feedback_3, :id)
+    end
+    def upload_agreement_img_params
+      params.require(:applicant).permit(:agreement, :id)
+    end
+    def upload_management_payment_img_params
+      params.require(:applicant).permit(:management_payment, :id)
+    end
+
+    def applicant_report_params
+      params.require(:applicant_report).permit(:title, :comment, :applicant_id)
+    end
+
+    def applicant_report_img_params
+      params.require(:applicant_report).permit(:report_img, :payment_img)
     end
 end

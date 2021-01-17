@@ -10,6 +10,9 @@ class Applicant < ApplicationRecord
     has_one_attached :feedback_1
     has_one_attached :feedback_2
     has_one_attached :feedback_3
+
+    has_one_attached :agreement
+    has_one_attached :management_payment
     
     has_one :state
     has_one :city
