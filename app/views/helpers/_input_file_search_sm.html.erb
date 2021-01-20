@@ -1,0 +1,31 @@
+<% field ||= "" %>
+<% label ||= "Buscar archivo" %>
+<% id ||= "Campo" %>
+<% req ||= false %>
+<div class="row pl-3 pr-4">
+  <div class="col-8 form-group border border-primary py-3 px-3 mx-0 mx-3 rounded">
+    <div class="row px-3 py-3">
+      <div class="col-12">
+      <% if req %>
+        <label class="form-control-label"><%= label %> <span class="color-red">*</span> </label>
+      <% else %>
+        <label class="form-control-label"><%= label %></label>
+      <% end %>
+      </div>
+    </div>
+    <%= f.file_field field, id: id, class: "form-control", hidden: "true" %>
+    <button type="button" class="btn btn-outline-primary" onclick="$('#<%= id %>').click()"> Cargar archivo </button>
+    <label style="align-self: center;" id="label_<%= id %>" class="ml-3 form-label">Nada seleccionado</label>  
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var input = $("#<%= id %>");
+  var label = $("#label_<%= id %>");
+  input.val("");
+  input.change(function(){
+    label.text(input.val().split('\\').pop());
+  });
+});
+</script>

@@ -1,0 +1,29 @@
+<div>
+  <h4>
+    <strong>Validación</strong>
+  </h4>
+</div>
+<% if @applicant.status == 2%>
+  <div class="alert alert-danger" role="alert">
+    Rechazado por <%= User.find(@applicant.admin_id).fullname %> el <%= simple_date_format(@applicant.updated_at) %>
+  </div>
+<% end %>
+<% if @applicant.admin_id.present? && @applicant.status == 1%>
+  <div class="alert alert-success" role="alert">
+    Validacion por <%= User.find(@applicant.admin_id).fullname %> el <%= simple_date_format(@applicant.updated_at) %>
+  </div>
+<% else %>
+  <%= form_for @applicant, :url => { :action => 'update_status'}, :html => { id: "update_status_form"} do |form|%>
+    <%= form.hidden_field :id, value: @applicant.id %>
+    <%= form.hidden_field :status, value: 0, id: "status_input"%>
+    <%= render "helpers/textarea_input", f: form, label: "Comentarios", field: "mail_comment" %>
+  <% end %>
+  <div class="form-goup row">
+    <label class="col-sm-2 form-control-label"></label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <button type="button" class="btn btn-success" id="validates_applicant">Validar</button>
+        <button type="button" class="btn btn-danger" id="rejects_applicant">Rechazar</button>
+    </div>
+      
+  </div>
+<% end %>

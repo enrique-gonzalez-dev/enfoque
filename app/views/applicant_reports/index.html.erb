@@ -1,0 +1,64 @@
+<%= render "helpers/bread", index: root_path, iname: "Inicio", current: "Reportes de Becarios" %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'data_tables-bundle', media: 'all' %>
+<% end %>
+
+<section class="card mb-3">
+  <header class="card-header card-header-lg py-3 mb-3">     
+    <h4>
+      Reportes de Becarios
+    </h4>
+  </header>
+  <div class="card-block">
+    <div class="form-group ml-1 row">
+      <label class="col-12 form-control-label">Buscar por becario</label>
+      <div class="col-6 mt-3">
+        	<%= select_tag('applicant_select',options_for_select(Applicant.where(status: 1).map{|k| [k.name, k.id]}),options = {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "applicant_selector", :prompt => "Selecciona"})%> 
+      </div>
+    </div>
+    <hr>
+    <table id="table" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
+      <thead>
+        <tr>
+          <th data-main="true" data-order="desc">Reporte</th>
+          <th > Becario</th>
+          <th > Fecha de registro</th>
+          <th data-action="true"> ACCIONES </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @applicant_reports.each do |obj| %>
+          <tr>
+            <td><%= obj.title %></td>
+            <td><%= Applicant.find(obj.applicant_id).name %></td>
+            <td><%= simple_date_format(obj.created_at) %></td>
+            <td class="actions">
+              <%= render "helpers/show_edit_destroy", id: obj.id %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="row mb-5">
+  <a href="applicant_reports/new" class="btn btn-primary ml-3" >Nuevo reporte</a>
+</div>
+
+
+<%= render :partial => 'helpers/data_container', :locals => { :controller => 'applicant_reports', :name => "Reportes", :gender => "M" } %>
+<% content_for :post_section do %>
+   <%= javascript_include_tag "index_tables-bundle" %>
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#applicant_selector").change(function(){
+    var id = $(this).val();
+    location.href = `/applicant_reports?id=${id}`;
+  });
+});
+        
+</script>

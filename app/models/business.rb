@@ -5,6 +5,7 @@ class Business < ApplicationRecord
 
     has_one :state
     has_one :city
+    has_many :business_reports
 
     has_one_attached :taxes_id
     has_one_attached :internal_img
@@ -16,6 +17,17 @@ class Business < ApplicationRecord
     has_one_attached :official_back_id
     has_one_attached :agent_proof
     has_one_attached :agent_selfie
+    
+    has_one_attached :feedback_1
+    has_one_attached :feedback_2
+    has_one_attached :feedback_3
+    has_one_attached :training_plan
+    
+    has_one_attached :agreement
+    has_one_attached :advance_payment
+    has_one_attached :verified_business
+    has_one_attached :settlement_payment
+
 
     validates :name, presence: true
     validates :name, length: { minimum: 4, message: "El nombre es demasiado corto" }

@@ -1,0 +1,12 @@
+<%= render "helpers/bread", index: applicant_reports_path, iname: "Reportes de Becarios", current: "Nuevo reporte" %>
+<section class="card mb-5">
+  <div class="card-header py-3 px-3">
+    <h4>
+      <strong>Nuevo reporte</strong>
+    </h4>
+  </div>
+  <div class="card-body px-5 py-3">
+    <%= render 'form', applicant_report: @applicant_report %>
+    <%= link_to 'Back', applicant_reports_path, class: "btn btn-danger my-3" %>
+  </div>
+</section>

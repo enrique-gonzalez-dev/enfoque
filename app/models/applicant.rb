@@ -1,8 +1,18 @@
 class Applicant < ApplicationRecord
     enum school_grade: [:Primaria, :Secundaria, :Preparatoria, :Universidad]
+    has_many :applicant_reports
+
+
     has_one_attached :cedule_id
     has_one_attached :address_proof
     has_one_attached :ine_id
+
+    has_one_attached :feedback_1
+    has_one_attached :feedback_2
+    has_one_attached :feedback_3
+
+    has_one_attached :agreement
+    has_one_attached :management_payment
 
     has_one :state
     has_one :city
