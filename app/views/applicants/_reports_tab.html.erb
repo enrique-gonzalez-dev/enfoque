@@ -19,7 +19,7 @@
   <div class="form-group row">
     	<label class="col-sm-2 form-control-label">Centro de trabajo</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
-        <p class="form-control-static"><input type="text" readonly class="form-control" value="<%= Applicant.find(@applicant_report.applicant_id).name %>" >
+        <p class="form-control-static"><input type="text" readonly class="form-control" value="<%= @applicant.business_prospect %>" >
       <%= f.hidden_field :applicant_id, value: @applicant_report.applicant_id%>
     </div>
   </div>

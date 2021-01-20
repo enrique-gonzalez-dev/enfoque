@@ -9,7 +9,7 @@
   <div class="card-body px-3">
         <%= render "helpers/panel_header_edit_destroy", edit: edit_applicant_report_path(@applicant_report), title:  @applicant_report.title %>
         <div class="row">
-            <%= render "helpers/text_show", n: "Centro de trabajo" , v: Applicant.find(@applicant_report.applicant_id).name %>
+            <%= render "helpers/text_show", n: "Centro de trabajo" , v: @applicant_report.applicant.business_prospect %>
             <%= render "helpers/text_show", n: "Fecha del reporte" , v: simple_date_format(@applicant_report.created_at) %>
             <%= render "helpers/text_show", n: "Comentarios" , v: @applicant_report.comment %>
         </div>
@@ -71,7 +71,6 @@
             </div>
         </div>
         <hr>
-        <%= link_to 'Regresar', applicant_reports_path, class: "btn btn-danger" %>
         <%= link_to 'Ver Becario', Applicant.find(@applicant_report.applicant_id), class: "ml-2 btn btn-warning" %>
   </div>
 </section>

@@ -7,10 +7,22 @@
   <div class="alert alert-danger" role="alert">
     Rechazado por <%= User.find(@applicant.admin_id).fullname %> el <%= simple_date_format(@applicant.updated_at) %>
   </div>
+  <div class="form-group row">
+    <label class="col-sm-2 form-control-label">Comentarios</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <p class="form-control-static"><input type="text" readonly class="form-control" value="<%= @applicant.mail_comment %>" >
+    </div>
+  </div>
 <% end %>
 <% if @applicant.admin_id.present? && @applicant.status == 1%>
   <div class="alert alert-success" role="alert">
     Validacion por <%= User.find(@applicant.admin_id).fullname %> el <%= simple_date_format(@applicant.updated_at) %>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 form-control-label">Comentarios</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <p class="form-control-static"><input type="text" readonly class="form-control" value="<%= @applicant.mail_comment %>" >
+    </div>
   </div>
 <% else %>
   <%= form_for @applicant, :url => { :action => 'update_applicant_status'}, :html => { id: "update_status_form"} do |form|%>
