@@ -11,7 +11,7 @@ class ApplicantsController < ApplicationController
     @rejected_applicants = Applicant.where(status: 2)
 
   end
-  
+
   # GET /applicants/1
   # GET /applicants/1.json
   def show
@@ -72,7 +72,6 @@ class ApplicantsController < ApplicationController
 
   def new_applicant
     @applicant = Applicant.new
-
   end
 
   def upload_ine_id_img
@@ -89,6 +88,7 @@ class ApplicantsController < ApplicationController
       end
     end
   end
+
   def upload_cedule_id_img
     @applicant = Applicant.find(upload_cedule_id_img_params[:id])
     @applicant.cedule_id.attach(upload_cedule_id_img_params[:cedule_id])
@@ -103,6 +103,7 @@ class ApplicantsController < ApplicationController
       end
     end
   end
+
   def upload_address_proof_img
     @applicant = Applicant.find(upload_address_proof_img_params[:id])
     @applicant.address_proof.attach(upload_address_proof_img_params[:address_proof])
@@ -149,8 +150,9 @@ class ApplicantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def applicant_params
-      params.require(:applicant).permit(:name, :birthday, :street, :colony, :number, :state_id, :city_id, :zip_code, :id_code, :curp_code, :phone, :email, :social_profile,:school, :finish_date, :school_grade, :familiar_fullname, :familiar_relationship, :familiar_phone, :comments, :protest )
+      params.require(:applicant).permit(:name, :birthday, :street, :colony, :number, :inside_number, :business_prospect, :state_id, :city_id, :zip_code, :id_code, :curp_code, :phone, :email, :social_profile,:school, :finish_date, :school_grade, :familiar_fullname, :familiar_relationship, :familiar_phone, :comments, :protest )
     end
+
     def applicant_documents_params
       params.require(:applicant).permit(:cedule_id, :address_proof, :ine_id)
     end
@@ -158,12 +160,15 @@ class ApplicantsController < ApplicationController
     def upload_ine_id_img_params
       params.require(:applicant).permit(:ine_id, :id)
     end
+
     def upload_cedule_id_img_params
       params.require(:applicant).permit(:cedule_id, :id)
     end
+
     def upload_address_proof_img_params
       params.require(:applicant).permit(:address_proof, :id)
     end
+
     def update_applicant_status_params
       params.require(:applicant).permit(:status, :id, :mail_comment)
     end

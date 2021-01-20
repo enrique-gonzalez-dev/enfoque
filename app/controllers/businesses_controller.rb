@@ -25,8 +25,8 @@ class BusinessesController < ApplicationController
   # GET /businesses/1/edit
   def edit
   end
+
   def registry_success
-    
   end
 
   # POST /businesses
@@ -83,7 +83,6 @@ class BusinessesController < ApplicationController
     end
   end
 
-  
   def upload_internal_img
     @business = Business.find(upload_internal_img_params[:id])
     @business.internal_img.attach(upload_internal_img_params[:internal_img])
@@ -128,7 +127,7 @@ class BusinessesController < ApplicationController
       end
     end
   end
-  
+
   def upload_official_id_img
     @business = Business.find(upload_official_id_img_params[:id])
     @business.official_id.attach(upload_official_id_img_params[:official_id])
@@ -188,6 +187,7 @@ class BusinessesController < ApplicationController
       end
     end
   end
+
   def upload_agent_selfie_img
     @business = Business.find(upload_agent_selfie_img_params[:id])
     @business.agent_selfie.attach(upload_agent_selfie_img_params[:agent_selfie])
@@ -226,8 +226,6 @@ class BusinessesController < ApplicationController
     end
   end
 
-  
-
   # DELETE /businesses/1
   # DELETE /businesses/1.json
   def destroy
@@ -241,7 +239,7 @@ class BusinessesController < ApplicationController
     @business = Business.new
 
   end
-  
+
   def catch_city
     @state = State.find(catch_city_params[:state_id])
     respond_to do |format|
@@ -257,18 +255,21 @@ class BusinessesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def business_params
-      params.require(:business).permit( :admin_id, :kind, :name, :tax_cedule, :city_id, :state_id, :street, :colony, :zip_code, :phone, :email, :minimum_grade, :quantity_employees, :required_applicants, :agent_name, :agent_id_code, :agent_phone, :agent_email, :agent_position, :comments)
+      params.require(:business).permit( :admin_id, :kind, :name, :tax_cedule, :city_id, :state_id, :number, :inside_number, :street, :colony, :zip_code, :phone, :email, :minimum_grade, :quantity_employees, :required_applicants, :agent_name, :agent_id_code, :agent_phone, :agent_email, :agent_position, :agent_curp_code, :comments)
     end
+
     def catch_city_params
       params.require(:catch_city).permit(:state_id)
     end
+
     def upload_internal_img_params
       params.require(:business).permit(:internal_img, :id)
     end
+
     def upload_external_img_params
       params.require(:business).permit(:external_img, :id)
     end
-    
+
     def upload_taxes_img_params
       params.require(:business).permit(:taxes_id, :id)
     end
@@ -284,6 +285,7 @@ class BusinessesController < ApplicationController
     def upload_official_back_id_img_params
       params.require(:business).permit(:official_back_id, :id)
     end
+
     def upload_notarial_document_img_params
       params.require(:business).permit(:notarial_document, :id)
     end
@@ -291,14 +293,15 @@ class BusinessesController < ApplicationController
     def upload_agent_proof_img_params
       params.require(:business).permit(:agent_proof, :id)
     end
+
     def upload_agent_selfie_img_params
       params.require(:business).permit(:agent_selfie, :id)
     end
-    
-    
+
     def business_documents_params
-      params.require(:business).permit(:taxes_id, :internal_img, :external_img, :proof_residency, :official_id, :agent_proof, :agent_selfie)
+      params.require(:business).permit(:taxes_id, :internal_img, :external_img, :proof_residency, :official_id, :official_back_id, :notarial_document, :agent_proof, :agent_selfie)
     end
+
     def update_status_params
       params.require(:business).permit(:status, :id, :mail_comment)
     end
