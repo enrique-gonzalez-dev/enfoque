@@ -150,7 +150,7 @@ class ApplicantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def applicant_params
-      params.require(:applicant).permit(:name, :birthday, :street, :colony, :number, :inside_number, :business_prospect, :state_id, :city_id, :zip_code, :id_code, :curp_code, :phone, :email, :social_profile,:school, :finish_date, :school_grade, :familiar_fullname, :familiar_relationship, :familiar_phone, :comments, :protest )
+      params.require(:applicant).permit(:protest, :name, :birthday, :street, :colony, :number, :inside_number, :business_prospect, :state_id, :city_id, :zip_code, :id_code, :curp_code, :phone, :email, :social_profile,:school, :finish_date, :school_grade, :familiar_fullname, :familiar_relationship, :familiar_phone, :comments, :protest )
     end
 
     def applicant_documents_params

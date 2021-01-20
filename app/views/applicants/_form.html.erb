@@ -3,7 +3,17 @@
 <%= form_with(model: applicant, local: true) do |f| %>
 
   <p style="margin-left: -1rem;" class="py-2"><strong>Información Becario</strong></p>
-  
+
+  <div class="form-group">
+	  <label class="row form-control-label"><strong>Declaracion</strong></label>
+	  <div class="row">
+		  <div class="checkbox-toggle -large d-flex justify-content-between">
+			  <%= f.check_box(:protest, {:id=> 'protest_switch', :checked => false, class: "align-self-center"}) %>
+			  <label class="ml-3" for="protest_switch">Confirmo que por el momento NO ESTUDIO y NO TRABAJO, con el fin de poder ser candidato para el programa de Jóvenes Construyendo el Futuro.</label>
+		  </div>
+	  </div>
+  </div>
+
   <%= render "helpers/text_input_register", f: f, label: "Nombre completo", field: "name", req: true%>
   <%= render "helpers/text_input_register", f: f, label: "Nombre del negocio donde te capacitarás", field: "business_prospect"%>
   <div class="form-group" >
@@ -37,13 +47,13 @@
   </div>
   <%= render "helpers/text_input_register", f: f, label: "Código postal", field: "zip_code" %>
   <p style="margin-left: -1rem;" class="py-2"><strong>Datos Becario</strong></p>
-  
+
   <%= render "helpers/text_input_register", f: f, label: "Clave de Elector (viene en INE)", field: "id_code" %>
   <%= render "helpers/text_input_register", f: f, label: "CURP", field: "curp_code" %>
   <%= render "helpers/text_input_register", f: f, label: "Telefono Celular (10 dígitos)", field: "phone", req: true %>
   <%= render "helpers/email_input_register", f: f, label: "Correo Electrónico", field: "email", req: true %>
   <%= render "helpers/text_input_register", f: f, label: "Perfil en Facebook", field: "social_profile" %>
-  
+
   <div class="form-group ">
 		<label class="row form-control-label">Nivel de Estudios</label>
     <div class="row">
