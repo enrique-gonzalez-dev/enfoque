@@ -33,7 +33,7 @@ class ApplicantsController < ApplicationController
     @applicant_report = ApplicantReport.new(applicant_report_params)
     @applicant_report.report_img.attach(applicant_report_img_params[:report_img])
     @applicant_report.payment_img.attach(applicant_report_img_params[:payment_img])
-    
+
     respond_to do |format|
       if @applicant_report.save
         format.html { redirect_to @applicant, notice: 'Reporte creado correctamente' }
