@@ -13,7 +13,7 @@
     Validacion por <%= User.find(@applicant.admin_id).fullname %> el <%= simple_date_format(@applicant.updated_at) %>
   </div>
 <% else %>
-  <%= form_for @applicant, :url => { :action => 'update_status'}, :html => { id: "update_status_form"} do |form|%>
+  <%= form_for @applicant, :url => { :action => 'update_applicant_status'}, :html => { id: "update_status_form"} do |form|%>
     <%= form.hidden_field :id, value: @applicant.id %>
     <%= form.hidden_field :status, value: 0, id: "status_input"%>
     <%= render "helpers/textarea_input", f: form, label: "Comentarios", field: "mail_comment" %>
