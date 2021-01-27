@@ -16,13 +16,15 @@
         	<%= select_tag('applicant_select',options_for_select(Applicant.where(status: 1).map{|k| [k.name, k.id]}),options = {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "applicant_selector", :prompt => "Selecciona"})%> 
       </div>
     </div>
+      <%= link_to "Borrar filtros" , applicant_reports_path , class: "ml-3 btn btn-primary" %>
     <hr>
     <table id="table" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
       <thead>
         <tr>
           <th data-main="true" data-order="desc">Reporte</th>
           <th > Becario</th>
-          <th > Fecha de registro</th>
+          <th > Monto de pago</th>
+          <th > Fecha</th>
           <th data-action="true"> ACCIONES </th>
         </tr>
       </thead>
@@ -31,7 +33,8 @@
           <tr>
             <td><%= obj.title %></td>
             <td><%= Applicant.find(obj.applicant_id).name %></td>
-            <td><%= simple_date_format(obj.created_at) %></td>
+            <td><%= "$ " + obj.amount.to_s %></td>
+            <td><%= obj.report_date %></td>
             <td class="actions">
               <%= render "helpers/show_edit_destroy", id: obj.id %>
             </td>

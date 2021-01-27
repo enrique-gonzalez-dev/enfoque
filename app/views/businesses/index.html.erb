@@ -29,24 +29,25 @@
             <tr>
               <th data-main="true" data-order="desc">ID</th>
               <th > Nombre o <br> Razón Social</th>
-              <th > Tipo de <br> registro</th>
               <th > Alcaldía/ <br>Municipio</th>
               <th > Estado</th>
-              <th > Cantidad de <br>becarios</th>
-              <th > Grado <br>minimo</th>
+              <th > Owner(Validación)</th>
+              <th > ID Asociado</th>
+              <th > Estatus</th>
               <th data-action="true"> ACCIONES </th>
             </tr>
           </thead>
           <tbody>
             <% @validated_businesses.each do |obj| %>
               <tr>
+                <% associated = Business.find(obj.associated_id) if obj.associated_id.present? %>
                 <td><%= obj.id %></td>
                 <td><%= obj.name %></td>
-                <td><%= kind_str(obj.kind) %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
-                <td><%= obj.required_applicants %></td>
-                <td><%= obj.minimum_grade %></td>
+                <td><%= User.find(obj.admin_id).fullname if obj.admin_id.present? %></td>
+                <td><%= associated.name unless associated.nil? %></td>
+                <td><%= obj.internal_status %></td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
                 </td>
@@ -60,26 +61,29 @@
         <table id="table-1" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
           <thead>
             <tr>
+
               <th data-main="true" data-order="desc">ID</th>
               <th > Nombre o <br> Razón Social</th>
-              <th > Tipo de <br> registro</th>
               <th > Alcaldía/ <br>Municipio</th>
               <th > Estado</th>
-              <th > Cantidad de <br>becarios</th>
-              <th > Grado <br>minimo</th>
+              <th > Owner(Validación)</th>
+              <th > ID Asociado</th>
+              <th > Estatus</th>
               <th data-action="true"> ACCIONES </th>
             </tr>
           </thead>
           <tbody>
             <% @rejected_businesses.each do |obj| %>
               <tr>
+                <% associated = Business.find(obj.associated_id).name if obj.associated_id.present? %>
+                <% associated = "--" if associated.nil?%>
                 <td><%= obj.id %></td>
                 <td><%= obj.name %></td>
-                <td><%= kind_str(obj.kind) %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
-                <td><%= obj.required_applicants %></td>
-                <td><%= obj.minimum_grade %></td>
+                <td class="text-danger"><%= User.find(obj.admin_id).fullname if obj.admin_id.present? %></td>
+                <td><%= associated.name unless associated.nil? %></td>
+                <td>--</td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
                 </td>
@@ -95,24 +99,25 @@
             <tr>
               <th data-main="true" data-order="desc">ID</th>
               <th > Nombre o <br> Razón Social</th>
-              <th > Tipo de <br> registro</th>
               <th > Alcaldía/ <br>Municipio</th>
               <th > Estado</th>
-              <th > Cantidad de <br>becarios</th>
-              <th > Grado <br>minimo</th>
+              <th > Owner(Validación)</th>
+              <th > ID Asociado</th>
+              <th > Estatus</th>
               <th data-action="true"> ACCIONES </th>
             </tr>
           </thead>
           <tbody>
             <% @pending_businesses.each do |obj| %>
               <tr>
+                <% associated = Business.find(obj.associated_id) if obj.associated_id.present? %>
                 <td><%= obj.id %></td>
                 <td><%= obj.name %></td>
-                <td><%= kind_str(obj.kind) %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
-                <td><%= obj.required_applicants %></td>
-                <td><%= obj.minimum_grade %></td>
+                <td>--</td>
+                <td><%= associated.name unless associated.nil? %></td>
+                <td>--</td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
                 </td>

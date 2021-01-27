@@ -9,7 +9,9 @@
   <div class="card-body px-3">
         <%= render "helpers/panel_header_edit_destroy", edit: edit_applicant_report_path(@applicant_report), title:  @applicant_report.title %>
         <div class="row">
-            <%= render "helpers/text_show", n: "Centro de trabajo" , v: @applicant_report.applicant.business_prospect %>
+            <%= render "helpers/text_show", n: "Becario" , v: Applicant.find(@applicant_report.applicant_id).name %>
+            <%= render "helpers/text_show", n: "Fecha" , v: @applicant_report.report_date %>
+            <%= render "helpers/text_show", n: "Monto de pago" , v: "$ " + @applicant_report.amount.to_s %>
             <%= render "helpers/text_show", n: "Fecha del reporte" , v: simple_date_format(@applicant_report.created_at) %>
             <%= render "helpers/text_show", n: "Comentarios" , v: @applicant_report.comment %>
         </div>

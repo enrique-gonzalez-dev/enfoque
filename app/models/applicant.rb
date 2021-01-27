@@ -1,5 +1,6 @@
 class Applicant < ApplicationRecord
     enum school_grade: [:Primaria, :Secundaria, :Preparatoria, :Universidad]
+    enum internal_status: [:Cargando, :Enviado, :Ajustarlo, :Verificado]
     has_many :applicant_reports
 
 
@@ -23,5 +24,5 @@ class Applicant < ApplicationRecord
     validates :phone, numericality: { message: "El teléfono solo debe incluir numeros"}
     validates :phone, length: { minimum: 10, message: "El teléfono debe incluir 10 digitos" }
     validates :email, presence: true
-    validates :protest, acceptance: { message: 'Debes declarar que NO estudias y NO trabajas, con el fin de poder ser candidato para el programa de Jóvenes Construyendo el Futuro.' }
+    #validates :protest, acceptance: { message: 'Debes declarar que NO estudias y NO trabajas, con el fin de poder ser candidato para el programa de Jóvenes Construyendo el Futuro.' }
 end

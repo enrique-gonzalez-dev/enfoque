@@ -58,6 +58,9 @@ Rails.application.routes.draw do
 
   patch 'update_applicant_status' => 'applicants#update_applicant_status'
   patch 'update_status' => 'businesses#update_status'
+  patch 'update_internal_status' => 'applicants#update_internal_status'
+  
+  patch 'update_internal_business_status' => 'businesses#update_internal_status'
 
   get 'registry_success' => 'businesses#registry_success'
   get 'registry_applicant_success' => 'applicants#registry_applicant_success'

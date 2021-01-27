@@ -1,8 +1,15 @@
 <%= render "helpers/panel_header_edit_destroy", edit: edit_business_path(@business), title: "" %>
+<% if @business.status == 1 %>  
+  <div class="alert alert-warning my-3" role="alert">
+    Realizar algún cambio en los documentos del centro de trabalo requiere volver a validar.
+  </div>
+<% end %>
 <div class="row">
   <%= render "helpers/text_show", n: "Tipo de registro" , v: kind_str(@business.kind) %>
   <%= render "helpers/text_show", n: "Nombre o razón social" , v: @business.name %>
   <%= render "helpers/text_show", n: "RFC" , v: @business.tax_cedule %>
+  <% associated_business = Business.find(@business.associated_id) if @business.associated_id.present? %>
+  <%= render "helpers/text_show", n: "ID Asociado" , v:  associated_business.name unless associated_business.nil? %>
 </div>
 <p class="mt-3"><strong>Domicilio del centro de trabajo</strong></p>
 <div class="row">

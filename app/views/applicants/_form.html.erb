@@ -3,7 +3,6 @@
 <%= form_with(model: applicant, local: true) do |f| %>
 
   <p style="margin-left: -1rem;" class="py-2"><strong>Información Becario</strong></p>
-
   <div class="form-group">
 	  <label class="row form-control-label"><strong>Declaracion</strong></label>
 	  <div class="row">
@@ -13,7 +12,6 @@
 		  </div>
 	  </div>
   </div>
-
   <%= render "helpers/text_input_register", f: f, label: "Nombre completo", field: "name", req: true%>
   <%= render "helpers/text_input_register", f: f, label: "Nombre del negocio donde te capacitarás", field: "business_prospect"%>
   <div class="form-group" >

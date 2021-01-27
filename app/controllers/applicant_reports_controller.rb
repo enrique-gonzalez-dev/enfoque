@@ -104,7 +104,7 @@ class ApplicantReportsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def applicant_report_params
-      params.require(:applicant_report).permit(:title, :comment, :applicant_id)
+      params.require(:applicant_report).permit(:title, :comment, :applicant_id, :amount, :report_date)
     end
 
     def applicant_report_img_params

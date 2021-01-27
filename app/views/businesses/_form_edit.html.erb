@@ -10,6 +10,14 @@
 
   <%= render "helpers/text_input", f: f, label: "Nombre o Razón Social de la Empresa", field: "name" %>
   <%= render "helpers/text_input", f: f, label: "RFC", field: "tax_cedule" %>
+  
+  <div class="form-group row">
+		<label class="col-sm-2 form-control-label">ID Asociado</label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <% %>
+        <%= f.collection_select(:associated_id, Business.all.order(:name), :id, :name, {:prompt => 'Seleccione un centro de trabajo'}, {:class => "selectpicker form-control", 'data-live-search' => "true"}) %>
+    </div>
+  </div>
 
   <p style="" class="py-2"><strong>Domicilio del centro de trabajo</strong></p>
   
