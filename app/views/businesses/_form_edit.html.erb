@@ -4,23 +4,23 @@
   <div class="form-group row ">
 		<label class="col-sm-2 form-control-label">Tipo de registro</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
-      <%= f.select :kind ,Business.kinds.keys.map { |w| [kind_str(w), w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>  
+      <%= f.select :kind ,Business.kinds.keys.map { |w| [kind_str(w), w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>
     </div>
   </div>
 
   <%= render "helpers/text_input", f: f, label: "Nombre o Razón Social de la Empresa", field: "name" %>
   <%= render "helpers/text_input", f: f, label: "RFC", field: "tax_cedule" %>
-  
+
   <div class="form-group row">
 		<label class="col-sm-2 form-control-label">ID Asociado</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
       <% %>
-        <%= f.collection_select(:associated_id, Business.all.order(:name), :id, :name, {:prompt => 'Seleccione un centro de trabajo'}, {:class => "selectpicker form-control", 'data-live-search' => "true"}) %>
+      <%= f.collection_select(:associated_id, @array_num = [*01..20], :to_s, :to_s, {:prompt => 'Seleccione un asociado'}, {:class => "selectpicker form-control", 'data-live-search' => "true"}) %>
     </div>
   </div>
 
   <p style="" class="py-2"><strong>Domicilio del centro de trabajo</strong></p>
-  
+
   <%= render "helpers/text_input", f: f, label: "Calle", field: "street" %>
   <%= render "helpers/text_input", f: f, label: "Número exterior", field: "number" %>
   <%= render "helpers/text_input", f: f, label: "Número interior", field: "inside_number" %>
@@ -46,10 +46,10 @@
   <div class="form-group row">
 		<label class="col-sm-2 form-control-label">Minimo de estudios aceptado</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
-      <%= f.select :minimum_grade ,Business.minimum_grades.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus", :id => "minimum_grade_selector"} %>  
+      <%= f.select :minimum_grade ,Business.minimum_grades.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus", :id => "minimum_grade_selector"} %>
     </div>
   </div>
-  
+
   <p style="" class="py-2"><strong>Datos del Representante ante el Programa (Persona)</strong></p>
   <%= render "helpers/text_input", f: f, label: "Nombre(s) y Apellidos", field: "agent_name" %>
   <%= render "helpers/text_input", f: f, label: "Clave de Elector (viene en INE)", field: "agent_id_code" %>
@@ -58,11 +58,11 @@
   <div class="form-group row">
 		<label class="col-sm-2 form-control-label">Cargo en el Centro de Trabajo</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
-      <%= f.select :agent_position ,Business.agent_positions.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>  
+      <%= f.select :agent_position ,Business.agent_positions.keys.map { |w| [w.humanize, w] },{:prompt=>"Selecciona una opción"},{:class=> "selectpicker form-control no-mayus"} %>
     </div>
   </div>
-  
-  
+
+
   <div class="actions mt-3" >
     <%= f.submit "Actualizar", class: "btn btn-warning", style: "" %>
     <%= link_to "Cancelar", @business, class: "btn btn-danger"%>
@@ -81,7 +81,7 @@ $(document).ready(function(){
       }
   });
   $("#state_selector").change(function()
-  {    
+  {
       onNewSelection($(this));
   });
 });

@@ -6,7 +6,7 @@
       <strong>Centro de trabajo</strong>
     </h4>
   </div>
-  <% if @business.status == 1 %>  
+  <% if @business.status == 1 %>
     <div class="alert alert-warning mx-3 my-3" role="alert">
       Realizar algún cambio en los datos del centro de trabajo, requiere volver a validar.
       <%= link_to "Cancelar" , businesses_path , class: "text-danger" %>

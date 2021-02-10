@@ -3,11 +3,11 @@
 <% end %>
 
 <section class="card mb-3">
-     <header class="card-header card-header-lg py-3 mb-3">     
+     <header class="card-header card-header-lg py-3 mb-3">
         <h4>
           Centros de trabajo
         </h4>
-    </header>  
+    </header>
 
    <div class="card-block">
    <ul class="nav nav-tabs my-4 px-2" id="myIconTab" role="tablist">
@@ -20,7 +20,7 @@
         <li class="nav-item">
             <a class="nav-link text-warning" id="pending-tab" data-toggle="tab" href="#pending_tab" role="tab" aria-controls="profileIcon" aria-selected="false"><i class="nav-icon i-Find-User mr-1"></i>Pendientes </a>
         </li>
-        
+
     </ul>
     <div class="tab-content" id="myIconTabContent">
       <div class="tab-pane fade show active" id="validated-tab" role="tabpanel" aria-labelledby="validated_tab">
@@ -40,13 +40,12 @@
           <tbody>
             <% @validated_businesses.each do |obj| %>
               <tr>
-                <% associated = Business.find(obj.associated_id) if obj.associated_id.present? %>
                 <td><%= obj.id %></td>
                 <td><%= obj.name %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
                 <td><%= User.find(obj.admin_id).fullname if obj.admin_id.present? %></td>
-                <td><%= associated.name unless associated.nil? %></td>
+                <td><%= obj.associated_id %></td>
                 <td><%= obj.internal_status %></td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
@@ -55,7 +54,7 @@
             <% end %>
           </tbody>
         </table>
-        
+
       </div>
       <div class="tab-pane fade" id="rejected_tab" role="tabpanel" aria-labelledby="rejected-tab">
         <table id="table-1" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
@@ -75,14 +74,12 @@
           <tbody>
             <% @rejected_businesses.each do |obj| %>
               <tr>
-                <% associated = Business.find(obj.associated_id).name if obj.associated_id.present? %>
-                <% associated = "--" if associated.nil?%>
                 <td><%= obj.id %></td>
                 <td><%= obj.name %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
                 <td class="text-danger"><%= User.find(obj.admin_id).fullname if obj.admin_id.present? %></td>
-                <td><%= associated.name unless associated.nil? %></td>
+                <td><%= obj.associated_id %></td>
                 <td>--</td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
@@ -91,7 +88,7 @@
             <% end %>
           </tbody>
         </table>
-        
+
       </div>
       <div class="tab-pane fade" id="pending_tab" role="tabpanel" aria-labelledby="pending-tab">
         <table id="table-2" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
@@ -110,13 +107,12 @@
           <tbody>
             <% @pending_businesses.each do |obj| %>
               <tr>
-                <% associated = Business.find(obj.associated_id) if obj.associated_id.present? %>
                 <td><%= obj.id %></td>
                 <td><%= obj.name %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
                 <td>--</td>
-                <td><%= associated.name unless associated.nil? %></td>
+                <td><%= obj.associated_id %></td>
                 <td>--</td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
@@ -125,7 +121,7 @@
             <% end %>
           </tbody>
         </table>
-        
+
       </div>
 
     </div>
