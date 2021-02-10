@@ -58,8 +58,10 @@ class BusinessesController < ApplicationController
     @business.proof_residency.attach(business_documents_params[:proof_residency])
 
     @business.official_id.attach(business_documents_params[:official_id])
+    @business.official_back_id.attach(business_documents_params[:official_back_id])
     @business.agent_proof.attach(business_documents_params[:agent_proof])
     @business.agent_selfie.attach(business_documents_params[:agent_selfie])
+    @business.notarial_document.attach(business_documents_params[:notarial_document])
 
     respond_to do |format|
       if @business.save
@@ -378,6 +380,20 @@ class BusinessesController < ApplicationController
     end
   end
 
+  def update_internal_status
+    @business = Business.find(update_internal_status_params[:business_id])
+    @business.internal_status = update_internal_status_params[:internal_status]
+    respond_to do |format|
+      if @business.save
+        format.html { redirect_to @business, notice: 'Estatus actualizado correctamente' }
+        format.json { render :show, status: :ok, location: @business }
+      else
+        format.html { render :show }
+        format.json { render json: @business.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_business
@@ -386,7 +402,7 @@ class BusinessesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def business_params
-      params.require(:business).permit( :admin_id, :kind, :name, :tax_cedule, :city_id, :state_id, :number, :inside_number, :street, :colony, :zip_code, :phone, :email, :minimum_grade, :quantity_employees, :required_applicants, :agent_name, :agent_id_code, :agent_phone, :agent_email, :agent_position, :agent_curp_code, :comments)
+      params.require(:business).permit( :admin_id, :kind, :name, :tax_cedule, :associated_id , :city_id, :state_id, :number, :inside_number, :street, :colony, :zip_code, :phone, :email, :minimum_grade, :quantity_employees, :required_applicants, :agent_name, :agent_id_code, :agent_phone, :agent_email, :agent_position, :agent_curp_code, :comments)
     end
 
     def catch_city_params
@@ -466,11 +482,15 @@ class BusinessesController < ApplicationController
     end
 
     def business_report_params
-      params.require(:business_report).permit(:title, :comment, :business_id)
+      params.require(:business_report).permit(:title, :comment, :business_id, :report_date, :amount)
     end
 
     def business_report_img_params
       params.require(:business_report).permit(:report_img, :payment_img)
+    end
+
+    def update_internal_status_params
+      params.require(:business).permit(:internal_status, :business_id)
     end
 end
 

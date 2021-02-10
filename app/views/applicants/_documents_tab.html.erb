@@ -1,6 +1,11 @@
 <%= render "helpers/panel_header_edit_destroy", edit: edit_applicant_path(@applicant), title: "" %>
 
 <p><strong>Documentos del becario</strong></p>
+<% if @applicant.status == 1 %>  
+  <div class="alert alert-warning my-3" role="alert">
+    Realizar algún cambio en los documentos del becario, requiere volver a validar.
+  </div>
+<% end %>
 <div class="row">
   <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
     <%= form_for @applicant, id: "upload_ine_id_img_form" , :url => { :action => 'upload_ine_id_img'}, :html => { id: "upload_ine_id_form"} do |form|%>

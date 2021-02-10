@@ -10,7 +10,8 @@
         <%= render "helpers/panel_header_edit_destroy", edit: edit_business_report_path(@business_report), title:  @business_report.title %>
         <div class="row">
             <%= render "helpers/text_show", n: "Centro de trabajo" , v: Business.find(@business_report.business_id).name %>
-            <%= render "helpers/text_show", n: "Fecha del reporte" , v: simple_date_format(@business_report.created_at) %>
+            <%= render "helpers/text_show", n: "Fecha" , v: @business_report.report_date %>
+            <%= render "helpers/text_show", n: "Monto de pago" , v: "$ " + @business_report.amount.to_s %>
             <%= render "helpers/text_show", n: "Comentarios" , v: @business_report.comment %>
         </div>
         <hr>

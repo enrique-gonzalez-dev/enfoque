@@ -31,8 +31,9 @@
               <th > Nombre</th>
               <th > Alcaldia/ <br> Municipio</th>
               <th > Estado</th>
-              <th > Fecha de nacimiento</th>
-              <th > Escolaridad</th>
+              <th > Owner(Validación)</th>
+              <th > Centro de trabajo</th>
+              <th > Estatus</th>
               <th data-action="true"> ACCIONES </th>
             </tr>
           </thead>
@@ -43,8 +44,9 @@
                 <td><%= obj.name %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
-                <td><%= obj.birthday %></td>
-                <td><%= obj.school_grade %></td>
+                <td><%= User.find(obj.admin_id).fullname if obj.admin_id.present? %></td>
+                <td><%= obj.business_prospect %></td>
+                <td><%= obj.internal_status %></td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
                 </td>
@@ -62,8 +64,9 @@
               <th > Nombre</th>
               <th > Alcaldia/ <br> Municipio</th>
               <th > Estado</th>
-              <th > Fecha de nacimiento</th>
-              <th > Escolaridad</th>
+              <th > Owner(Validación)</th>
+              <th > Centro de trabajo</th>
+              <th > Estatus</th>
               <th data-action="true"> ACCIONES </th>
             </tr>
           </thead>
@@ -74,8 +77,9 @@
                 <td><%= obj.name %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
-                <td><%= obj.birthday %></td>
-                <td><%= obj.school_grade %></td>
+                <td class="text-danger"><%= User.find(obj.admin_id).fullname if obj.admin_id.present? %></td>
+                <td><%= obj.business_prospect %></td>
+                <td><%= obj.internal_status %></td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
                 </td>
@@ -93,8 +97,9 @@
               <th > Nombre</th>
               <th > Alcaldia/ <br> Municipio</th>
               <th > Estado</th>
-              <th > Fecha de nacimiento</th>
-              <th > Escolaridad</th>
+              <th > Owner(Validación)</th>
+              <th > Centro de trabajo</th>
+              <th > Estatus</th>
               <th data-action="true"> ACCIONES </th>
             </tr>
           </thead>
@@ -105,8 +110,9 @@
                 <td><%= obj.name %></td>
                 <td><%= City.find(obj.city_id).name if obj.city_id.present? %></td>
                 <td><%= State.find(obj.state_id).name if obj.state_id.present? %></td>
-                <td><%= obj.birthday %></td>
-                <td><%= obj.school_grade %></td>
+                <td>--</td>
+                <td><%= obj.business_prospect %></td>
+                <td><%= obj.internal_status %></td>
                 <td class="actions">
                   <%= render "helpers/show_edit_destroy", id: obj.id %>
                 </td>

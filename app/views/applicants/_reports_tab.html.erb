@@ -4,7 +4,8 @@
       <div class="card-body">
         <p class="text-primary"><strong><%= report.title%></strong></p>
         <p><%= report.comment %></p>
-        <p><strong class="text-primary">Fecha: </strong><%= simple_date_format(report.created_at) %></p>
+        <p><strong class="text-primary">Fecha: </strong><%= report.report_date %></p>
+        <p><strong class="text-primary">Monto del pago: </strong><%= report.amount %></p>
         
         <%= link_to "Ver reporte" , report , class: "btn btn-primary" %>
         
@@ -17,12 +18,25 @@
 <%= form_for @applicant_report, :url =>{:action => 'create_applicant_report'} do |f| %>
   <%= render "helpers/text_input", f: f, label: "Reporte", field: "title" %>
   <div class="form-group row">
-    	<label class="col-sm-2 form-control-label">Centro de trabajo</label>
+    	<label class="col-sm-2 form-control-label">Becario</label>
     <div class="col-lg-6 col-md-8 col-sm-10">
-        <p class="form-control-static"><input type="text" readonly class="form-control" value="<%= @applicant.business_prospect %>" >
+        <p class="form-control-static"><input type="text" readonly class="form-control" value="<%= @applicant.name %>" >
       <%= f.hidden_field :applicant_id, value: @applicant_report.applicant_id%>
     </div>
   </div>
+  <div class="form-group row" >
+    <label class="col-sm-2 form-control-label">Fecha<span ></span></label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class='input-group date'>
+        <%= f.text_field(:report_date, class: "form-control daterange", value: date_to_picker_format(f.object.report_date)) %>
+        <span class="input-group-append">
+          <span class="input-group-text"><i class="i-Timer1"></i></span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <%= render "helpers/text_input", f: f, label: "Monto", field: "amount" %>
+
   <%= render "helpers/text_input", f: f, label: "Comentarios", field: "comment" %>
   <%= render "helpers/input_file_search_sm", f: f, id: "report_img", field: "report_img", label: "Foto del reporte" %>
   <%= render "helpers/input_file_search_sm", f: f, id: "payment_img", field: "payment_img", label: "Foto del pago" %>

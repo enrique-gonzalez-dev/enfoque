@@ -10,6 +10,14 @@
 
   <%= render "helpers/text_input_register", f: f, label: "Nombre o Razón Social de la Empresa", field: "name", req: true %>
   <%= render "helpers/text_input_register", f: f, label: "RFC", field: "tax_cedule" %>
+  
+  <div class="form-group ">
+		<label class="row form-control-label">ID Asociado</label>
+    <div class="row">
+      <% %>
+        <%= f.collection_select(:associated_id, @array_num = [*01..20], :to_s, :to_s, {:prompt => 'Seleccione un asociado'}, {:class => "selectpicker form-control", 'data-live-search' => "true"}) %>
+    </div>
+  </div>
 
   <p style="margin-left: -1rem;" class="py-2"><strong>Domicilio del centro de trabajo</strong></p>
   
@@ -45,7 +53,7 @@
   <%= render "helpers/input_file_search", f: f, id: "taxes_img", field: "taxes_id", label: "Cédula de Identificación Fiscal (RFC)" %>
   <%= render "helpers/input_file_search", f: f, id: "internal_img", field: "internal_img", label: "Foto Interior del Centro de Trabajo" %>
   <%= render "helpers/input_file_search", f: f, id: "external_img", field: "external_img", label: "Foto Exterior del Centro de Trabajo" %>
-  <%= render "helpers/input_file_search", f: f, id: "address_img", field: "proof_residency", label: "“Comprobante de Domicilio (no mayor a 3 meses de antigüedad, a nombre de la empresa cuando es Persona moral o del representante cuando es Persona Física, puede ser recibo telefónico o de luz)" %>
+  <%= render "helpers/input_file_search", f: f, id: "address_img", field: "proof_residency", label: "Comprobante de Domicilio (no mayor a 3 meses de antigüedad, a nombre de la empresa cuando es Persona moral o del representante cuando es Persona Física, puede ser recibo telefónico o de luz)" %>
 
   <p style="margin-left: -1rem;" class="py-2"><strong>Datos del Representante legal ante el Programa (Persona)</strong></p>
   <%= render "helpers/text_input_register", f: f, label: "Nombre(s) y Apellidos", field: "agent_name" %>

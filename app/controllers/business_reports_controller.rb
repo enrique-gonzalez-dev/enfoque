@@ -106,7 +106,7 @@ class BusinessReportsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def business_report_params
-      params.require(:business_report).permit(:title, :comment, :business_id)
+      params.require(:business_report).permit(:title, :comment, :business_id, :report_date, :amount)
     end
 
     def business_report_img_params

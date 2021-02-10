@@ -230,6 +230,20 @@ class ApplicantsController < ApplicationController
       end
     end
   end
+  
+  def update_internal_status
+    @applicant = Applicant.find(update_internal_status_params[:applicant_id])
+    @applicant.internal_status = update_internal_status_params[:internal_status]
+    respond_to do |format|
+      if @applicant.save
+        format.html { redirect_to @applicant, notice: 'Estatus actualizado correctamente' }
+        format.json { render :show, status: :ok, location: @applicant }
+      else
+        format.html { render :show }
+        format.json { render json: @applicant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -279,10 +293,13 @@ class ApplicantsController < ApplicationController
     end
 
     def applicant_report_params
-      params.require(:applicant_report).permit(:title, :comment, :applicant_id)
+      params.require(:applicant_report).permit(:title, :comment, :applicant_id, :report_date, :amount)
     end
 
     def applicant_report_img_params
       params.require(:applicant_report).permit(:report_img, :payment_img)
+    end
+    def update_internal_status_params
+      params.require(:applicant).permit(:internal_status, :applicant_id)
     end
 end

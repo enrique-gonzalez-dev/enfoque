@@ -1,5 +1,10 @@
 <%= render "helpers/panel_header_edit_destroy", edit: edit_business_path(@business), title: "" %>
 <p class="mt-3"><strong>Datos del Representante ante el Programa (Persona)</strong></p>
+<% if @business.status == 1 %>  
+  <div class="alert alert-warning my-3" role="alert">
+    Realizar algún cambio en los documentos del centro de trabajo, requiere volver a validar.
+  </div>
+<% end %>
 <div class="row">
   <%= render "helpers/text_show", n: "Nombre(s) y Apellidos" , v: @business.agent_name %>
   <%= render "helpers/text_show", n: "Clave de Elector (viene en INE)" , v: @business.agent_id_code %>

@@ -5,6 +5,12 @@
       <strong>Becario</strong>
     </h4>
   </div>
+  <% if @applicant.status == 1 %>  
+    <div class="alert alert-warning mx-3 my-3" role="alert">
+      Realizar algún cambio en los datos del becario, requiere volver a validar.
+      <%= link_to "Cancelar" , applicants_path , class: "text-danger" %>
+    </div>
+  <% end %>
   <div class="card-body px-5">
     <%= render 'form_edit', applicant: @applicant %>
   </div>

@@ -1,43 +1,43 @@
  <div class="side-content-wrap">
     <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
         <ul class="navigation-left">
-            <li class="nav-item active">
-                <a class="nav-item-hold" href="/">
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Inicio" id="index">
+                <a class="nav-item-hold btn-menu" href="/">
                     <i class="nav-icon i-Home1"></i>
                     <span class="nav-text">Inicio</span>
                 </a>
                 <div class="triangle"></div>
             </li>
-            <li class="nav-item">
-                <a class="nav-item-hold" href="/businesses">
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Centros de trabajo" id="businesses">
+                <a class="nav-item-hold btn-menu" href="/businesses">
                     <i class="nav-icon i-Suitcase"></i>
                     <span class="nav-text">Centros de trabajo</span>
                 </a>
                 <div class="triangle"></div>
             </li>    
-            <li class="nav-item">
-                <a class="nav-item-hold" href="/business_reports">
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Reportes de centros de trabajo" id="business_reports">
+                <a class="nav-item-hold btn-menu" href="/business_reports">
                     <i class="nav-icon i-Money-2"></i>
                     <span class="nav-text">Reportes</span>
                 </a>
                 <div class="triangle"></div>
             </li>   
-            <li class="nav-item">
-                <a class="nav-item-hold" href="/applicants">
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Becarios" id="applicants">
+                <a class="nav-item-hold btn-menu" href="/applicants">
                     <i class="nav-icon i-Library"></i>
                     <span class="nav-text">Becarios</span>
                 </a>
                 <div class="triangle"></div>
             </li>  
-            <li class="nav-item">
-                <a class="nav-item-hold" href="/applicant_reports">
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Reportes de becarios" id="applicant_reports">
+                <a class="nav-item-hold btn-menu" href="/applicant_reports">
                     <i class="nav-icon i-Money"></i>
                     <span class="nav-text">Reportes</span>
                 </a>
                 <div class="triangle"></div>
             </li>   
-            <li class="nav-item">
-                <a class="nav-item-hold" href="/admins">
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Administradores" id="admins">
+                <a class="nav-item-hold btn-menu" href="/admins">
                     <i class="nav-icon i-Administrator"></i>
                     <span class="nav-text">Usuarios</span>
                 </a>
@@ -47,3 +47,44 @@
         </ul>
     </div>
 </div>
+<style type="text/css">
+.btn-menu{
+    transition: ease all .5s;
+    
+}
+.btn-menu:hover{
+    color: #fff!important;
+    background-color: #3e3e3e ;
+    border-right: 1.5px solid #663399;
+}
+.selected{
+    background-color: #828282;
+    color: #fff!important;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var currentUrl = window.location.href;
+    console.log(currentUrl);
+    if (currentUrl.includes("businesses")) {
+        $("#businesses").addClass("selected")
+    }
+    else if (currentUrl.includes("applicants")) {
+        $("#applicants").addClass("selected")
+    }
+    else if (currentUrl.includes("business_reports")) {
+        $("#business_reports").addClass("selected")
+    }
+    else if (currentUrl.includes("applicant_reports")) {
+        $("#applicant_reports").addClass("selected")
+    }
+    else if (currentUrl.includes("admins")) {
+        $("#admins").addClass("selected")
+    }
+    else{
+        $("#index").addClass("selected")
+    }
+});
+
+</script>

@@ -4,7 +4,8 @@
       <div class="card-body">
         <p class="text-primary"><strong><%= report.title%></strong></p>
         <p><%= report.comment %></p>
-        <p><strong class="text-primary">Fecha: </strong><%= simple_date_format(report.created_at) %></p>
+        <p><strong class="text-primary">Fecha: </strong><%= report.report_date %></p>
+        <p><strong class="text-primary">Monto del pago: </strong><%= report.amount %></p>
         
         <%= link_to "Ver reporte" , report , class: "btn btn-primary" %>
         
@@ -23,6 +24,18 @@
       <%= f.hidden_field :business_id, value: @business_report.business_id%>
     </div>
   </div>
+  <div class="form-group row" >
+    <label class="col-sm-2 form-control-label">Fecha<span ></span></label>
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class='input-group date'>
+        <%= f.text_field(:report_date, class: "form-control daterange", value: date_to_picker_format(f.object.report_date)) %>
+        <span class="input-group-append">
+          <span class="input-group-text"><i class="i-Timer1"></i></span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <%= render "helpers/text_input", f: f, label: "Monto", field: "amount" %>
   <%= render "helpers/text_input", f: f, label: "Comentarios", field: "comment" %>
   <%= render "helpers/input_file_search_sm", f: f, id: "report_img", field: "report_img", label: "Foto del reporte" %>
   <%= render "helpers/input_file_search_sm", f: f, id: "payment_img", field: "payment_img", label: "Foto del pago" %>

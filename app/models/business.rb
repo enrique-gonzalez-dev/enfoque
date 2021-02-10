@@ -2,6 +2,7 @@ class Business < ApplicationRecord
     enum kind: [:fisica, :moral]
     enum minimum_grade: [:Primaria, :Secundaria, :Prepa, :Universidad]
     enum agent_position: [:Propietario, :Gerente, :Empleado]
+    enum internal_status: [:Cargando, :Enviado, :Ajustarlo, :Verificado, :Visitado, :Aprobado]
 
     has_one :state
     has_one :city
@@ -31,9 +32,8 @@ class Business < ApplicationRecord
 
     validates :name, presence: true
     validates :name, length: { minimum: 4, message: "El nombre es demasiado corto" }
-    validates :phone, presence: true
-    validates :phone, numericality: { message: "El teléfono solo debe incluir numeros"}
-    validates :phone, length: { minimum: 10, message: "El teléfono debe incluir 10 digitos" }
+    validates :agent_phone, numericality: { message: "El teléfono solo debe incluir numeros"}
+    validates :agent_phone, length: { minimum: 10, message: "El teléfono debe incluir 10 digitos" }
     validates :email, presence: true
 
     def kind_str

@@ -16,12 +16,15 @@
         	<%= select_tag('business_select',options_for_select(Business.where(status: 1).map{|k| [k.name, k.id]}),options = {:class => "selectpicker form-control", 'data-live-search' => "true", :id => "business_selector", :prompt => "Selecciona"})%> 
       </div>
     </div>
+    <%= link_to "Borrar filtros" , business_reports_path , class: "ml-3 btn btn-primary" %>
+
     <hr>
     <table id="table" class="display table table-bordered table-striped" cellspacing="0" width="100%" data-export="Listado de becarios">
       <thead>
         <tr>
           <th data-main="true" data-order="desc">Reporte</th>
           <th > Centro de trabajo</th>
+          <th > Monto de pago</th>
           <th > Fecha de registro</th>
           <th data-action="true"> ACCIONES </th>
         </tr>
@@ -31,7 +34,8 @@
           <tr>
             <td><%= obj.title %></td>
             <td><%= Business.find(obj.business_id).name %></td>
-            <td><%= simple_date_format(obj.created_at) %></td>
+            <td><%= "$ " + obj.amount.to_s %></td>
+            <td><%= obj.report_date %></td>
             <td class="actions">
               <%= render "helpers/show_edit_destroy", id: obj.id %>
             </td>
